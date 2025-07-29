@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Templates Areas</title>
+    <style>
+        .container{
+            display: grid;
+            grid-template-areas: 
+            "header header"
+            "menu content"
+            "footer footer"
+            ;
+            grid-template-columns: 1fr 3fr;
+            gap: 5px;
+            background-color: lightblue;
+            padding: 5px;
+        }
+
+        .container > div{
+            background-color: rgba(255,255,255,0.7);
+            padding: 10px;
+        }
+        .container > div.header{
+            grid-area:header;
+            text-align: center;
+        }
+        .container > div.menu{
+            grid-area:menu;
+            text-align: center;
+        }
+        .container > div.content{
+            grid-area:content;
+            text-align: center;
+        }
+        .container > div.footer{
+            grid-area:footer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid layout com Elementos semânticos</h1>
+    <p>
+        O grid template para áreas de layout cria um desingn responsivo para web pages sem utilizar floats, positions e flexbox.
+    </p>
+    <div class="container">
+        <div class="header"><h2>Meu Cabeçalho</h2></div>
+        <div class="menu">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+        <div class="content">
+            <h3>Lorem Ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem laborum aspernatur sunt aut pariatur consectetur eius ipsam, accusamus officia reiciendis nihil perferendis molestias totam. Quis commodi enim dolore maiores voluptatibus?</p>
+        </div>
+        <div class="footer"><h4>Rodapé</h4></div>
+    </div>
+</body>
+</html>

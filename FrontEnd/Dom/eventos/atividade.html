@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        botão
+    </div>
+    <script>
+        let box = document.getElementById("box");
+        box.addEventListener('click', clicar)
+        box.addEventListener('mouseenter', mouseenter)
+        box.addEventListener('mouseout', mouseout)
+
+        function clicar(){
+            box.style.backgroundColor= "yellow"
+            box.innerHTML = 'clicou'
+        }
+
+        function mouseenter(){
+            box.style.backgroundColor= "green"
+            box.innerHTML = 'tá em mim'
+        }
+
+        function mouseout(){
+            box.style.backgroundColor= "red"
+            box.innerHTML = 'não tá em mim'
+        }
+    </script>
+</body>
+</html>

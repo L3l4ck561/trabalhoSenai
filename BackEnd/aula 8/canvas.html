@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="meuCanvas" width="800" height="600" style="border: 1px solid black;">
+        O Cnvas não está ativado no seu navegador
+    </canvas>
+    <script type="text/javascript">
+        var canvas = document.getElementById("meuCanvas");
+        var contexto = canvas.getContext('2d')
+        //trabalhando com texto no canvas
+        // contexto.fillText("Olá, Mundo!", 300,200)
+        contexto.font='100px arial'
+        contexto.lineWith=4
+
+        //preenchido de azul
+        contexto.fillStyle='black'
+        contexto.fillText('=', 200,250)
+        contexto.fillStyle='blue'
+        contexto.fillText('J', 50,250)
+
+        //com traço verde
+
+        contexto.strokeStyle='green'
+        contexto.strokeText('J', 125,250)
+
+        //juntando os dois
+        contexto.fillText('J', 275,250)
+        contexto.strokeText('J', 275,250)
+
+        //trabalhando com sombra no canvas
+        contexto.shadowBlur=20
+        contexto.shadowOffsetX = 0
+        contexto.shadowOffsetY = 0
+        contexto.shadowColor = 'red'
+        contexto.fillRect(50,50,100,100)
+    </script>
+</body>
+</html>

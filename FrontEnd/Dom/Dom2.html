@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Insira uma imagem no documento HTML e através do script altere essa imagem por outra imagem -->
+    <input id="url" type="text" placeholder="Insira uma URL">
+    <button onclick="trocarImagem()">Enviar</button><br><br>
+    <img id="image" src="" alt=""><br>
+    <p id="p1">Esse parágrafo não possui propriedade</p>
+    <p id="p2">Esse parágrafo possui propriedade</p>
+
+
+
+    <script>
+        document.write(Date())
+        function trocarImagem() {
+            let url = document.getElementById("url").value
+            document.getElementById("image").src = url
+        }
+
+        document.getElementById("p2").style.backgroundColor = "blue"
+        document.getElementById("p2").style.color = "red"
+        document.getElementById("p2").style.fontFamily = "arial"
+        document.getElementById("p2").style.fontSize = "30px"
+    </script>
+</body>
+</html>

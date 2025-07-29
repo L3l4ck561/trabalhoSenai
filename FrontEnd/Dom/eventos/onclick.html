@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos js</title>
+</head>
+<body onload="carregar()">
+    <h1>Utilize o DOM para criar um evento onchange para um elemento input</h1>
+    Entre com nome: <input type="text" id="nome">
+
+    <h1>Utilize o DOM para criar um evento onmouseover</h1>
+    <div onmouseover="mouseOVER(this)" onmouseout="mouseOUT(this)" style="background-color:green;padding:40px;">Evento MouseOver</div>
+
+    <h1>Utilize o DOM para criar um evento onkeydown</h1>
+    <p>Pressione um tecla no campo input</p>
+    <input type="text" onkeydown="Tecla()">
+    <p id="texto"></p>
+
+    <script>
+        function carregar() {
+            alert("Página carregada")
+        }
+        function Tecla(){
+            document.getElementById("texto").innerHTML = "Você pressionou uma tecla dentro do campo"
+        }
+
+        document.getElementById('nome').onchange = function(){
+            minhaFuncao()
+        };
+        function minhaFuncao(){
+            var x = document.getElementById('nome');
+            x.value = x.value.toUpperCase();
+        }
+
+        function mouseOVER(obj){
+            obj.innerHTML = "Ativado"
+        }
+
+        function mouseOUT(obj){
+            obj.innerHTML = "desativado"
+        }
+    </script>
+</body>
+</html>

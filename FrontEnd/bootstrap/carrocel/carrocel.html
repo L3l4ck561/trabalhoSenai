@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+<!-- Container para galeria de imagem -->
+<div class="container">
+
+  <!-- Imagens com numeros em textos -->
+  <div class="mySlides">
+    <div class="numbertext">1 / 6</div>
+      <img src="/bootstrap/carrocel/imgs/img1.png" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 6</div>
+      <img src="/bootstrap/carrocel/imgs/img2.jfif" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 6</div>
+      <img src="/bootstrap/carrocel/imgs/img3.jfif" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">4 / 6</div>
+      <img src="/bootstrap/carrocel/imgs/img4.jfif" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">5 / 6</div>
+      <img src="/bootstrap/carrocel/imgs/img5.jfif" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">6 / 6</div>
+      <img src="/bootstrap/carrocel/imgs/img6.jpg" style="width:100%">
+  </div>
+
+  <!-- Botoes proximo e anterior -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094</a>
+  <a class="next" onclick="plusSlides(1)">&#10095</a>
+
+  <!-- Image text -->
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+  <!-- Galeria de imagens -->
+  <div class="row">
+    <div class="column">
+      <img class="demo cursor" src="/bootstrap/carrocel/imgs/img1.png" style="width:100%" onclick="currentSlide(1)" alt="  ">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="/bootstrap/carrocel/imgs/img2.jfif" style="width:100%" onclick="currentSlide(2)" alt="  ">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="/bootstrap/carrocel/imgs/img3.jfif" style="width:100%" onclick="currentSlide(3)" alt="  ">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="/bootstrap/carrocel/imgs/img4.jfif" style="width:100%" onclick="currentSlide(4)" alt="  ">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="/bootstrap/carrocel/imgs/img5.jfif" style="width:100%" onclick="currentSlide(5)" alt="  ">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="/bootstrap/carrocel/imgs/img6.jpg" style="width:100%" onclick="currentSlide(6)" alt="  ">
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

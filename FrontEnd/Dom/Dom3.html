@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text{
+            font-size: 20px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <p id="meuParagrafo">Texto original</p>
+    <button onclick="alterarTexto()">Alterar Texto</button>
+
+    <hr>
+
+    <h2>Alterando texto com Seletor Classe</h2>
+    <p class="text">Primeiro texto da Classe a ser alterado</p>
+    <p class="text">Segundo texto da Classe a ser alterado</p>
+    <button onclick="alterarTextoClasse()">Alterar Texto da classe (p1)</button>
+
+    <hr>
+
+    <h2>Alterando texto com tags</h2>
+    <p>Primeiro texto com tags (p3)</p>
+    <p>Segundo texto com tags (p4)</p>
+    <button onclick="alterarTextoTag()">Alterar Texto da classe (p1)</button>
+
+    <hr>
+
+    <h1>Aumentando tamanho pela tag</h1>
+    <p>texto aleatório</p>
+    <button onclick="aumentarTamanho()">Aumentar tamanho</button>
+
+    <script>
+        function alterarTexto() {
+            document.getElementById('meuParagrafo').innerText = "Texto alterado!";
+        }
+
+        function alterarTextoClasse(){
+            var elementosclasse = document.getElementsByClassName('text');
+            elementosclasse[0].innerText = "Texto de classe alterado (p1)";
+            elementosclasse[1].innerText = "Texto de classe alterado (p2)";
+        }
+
+        function alterarTextoTag(){
+            let alterartextoTag = document.getElementsByTagName('p')
+            alterartextoTag[3   ].innerText = 'novo texto (p3)';
+        }
+
+        function aumentarTamanho(){
+            let aumentarTamanho = document.getElementsByTagName('p')
+            aumentarTamanho[5].style.fontSize = '30px';
+        }
+    </script>
+</body>
+</html>

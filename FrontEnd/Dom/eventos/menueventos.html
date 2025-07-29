@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Eventos</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+        #menu {
+            background-color: gray;
+            padding: 10px;
+        }
+        .menu-item {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: lightgray;
+            padding: 5px;
+            border: 1px solid gainsboro;
+        }
+        .submenu-item {
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+
+        <div class="menu-item" id="item1" onmouseenter="entrar('item1')" onmouseout="sair('item1')" onclick="clicar('submenu1')">Item 1
+            <div class="submenu" id="submenu1" onmouseleave="sai2r('submenu1')">
+                <a class="submenu-item" href="#">Subitem 1</a>
+            </div>
+        </div>
+
+        <div class="menu-item" id="item2" onmouseenter="entrar('item2')" onmouseout="sair('item2')" onclick="clicar('submenu2')">Item 2
+            <div class="submenu" id="submenu2" onmouseleave="sair2('submenu2')">
+                <a class="submenu-item" href="#">Subitem 2</a>
+            </div>
+        </div>
+        <div class="menu-item" id="item3" onmouseenter="entrar('item3')" onmouseout="sair('item3')" onclick="clicar('submenu3')">Item 3
+            <div class="submenu" id="submenu3" onmouseleave="sair2('submenu3')">
+                <a class="submenu-item" href="#">Subitem 3</a>
+            </div>
+        </div>
+        <div class="menu-item" id="item4" onmouseenter="entrar('item4')" onmouseout="sair('item4')" onclick="clicar('submenu4')">Item 4
+            <div class="submenu" id="submenu4" onmouseleave="sair2('submenu4')">
+                <a class="submenu-item" href="#">Subitem 4</a>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function entrar(id) {
+            var elemento = document.getElementById(id);
+            elemento.style.backgroundColor='royalblue';
+        }
+        function sair(id) {
+            var elemento = document.getElementById(id);
+            elemento.style.backgroundColor='gray';
+        }
+        function clicar(id) {
+            var elemento = document.getElementById(id);
+            elemento.style.display='block';
+        }
+
+        function sair2(id) {
+            var elemento = document.getElementById(id);
+            elemento.style.display='none';
+        }
+    </script>
+</body>
+
+</html>

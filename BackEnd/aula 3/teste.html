@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        th, td{
+            border: 1px solid #000;
+        }
+        table #nome{
+            width: 300px;
+        }
+        table #idade{
+            padding: 5px;
+        }
+        .formulario{
+            margin-top: 30px;
+            border: 1px solid #000;
+            width: 300px;
+            padding: 10px;
+        }
+        .formulario, table{
+            margin: auto;
+            margin-top: 10px;
+        }
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+        <h1>testanto metodo crud com js</h1>
+
+        <table id="tabela"></table>
+
+        <div class="formulario">
+            <label for="nome">Nome:</label><br>
+            <input type="text" name="nome" id="nome-input"><br>
+            <label for="idade">Idade:</label><br>
+            <input type="number" name="idade" id="idade-input"><br>
+        </div>
+        
+        <button id="botao" onclick="opcao()" value="0">Enviar</button>
+
+    <script>
+        function opcao(){
+            let botao = document.getElementById('botao').innerHTML
+            if (botao == "Enviar"){
+                criate()
+            }else{
+                update()
+            }
+        }
+
+        //simulando um banco de dados
+        let data = [
+            {"nome": "carlos",
+            "idade": 18},
+            {"nome": "gordo",
+            "idade": 15},
+            {"nome": "davi",
+            "idade": 23},
+        ]
+
+        //metodo crud
+
+        // (R)
+        // lendo dados do banco
+        printar()
+        function printar(){
+            document.getElementById('tabela').innerHTML = '<table id="tabela"><tr><th id="id">ID</th><th id="nome">nome</th><th id="idade">idade</th></tr></table>'
+            for(let i = 0;i < data.length; i++){
+                document.getElementById('tabela').innerHTML += `<tr><td>${i}</td><td>${data[i].nome}</td><td>${data[i].idade}</td><td><button onclick="del(${i})"><b>X</b></button></td><td><button onclick="select(${i})">🖉</button></td></tr>`
+            }
+        }
+
+        // (C)
+        // adicionando um novo elemento
+        function criate(){
+            let nome = document.getElementById('nome-input').value
+            let idade = document.getElementById('idade-input').value
+            
+            data.push({
+                "nome": nome,
+                "idade": idade
+            },)
+
+            printar()
+        }
+
+        // (D)
+        // deletando um elemento
+        function del(num){
+            data.splice(num,1)
+            printar()
+        }
+
+        // (U)
+        // atualizando elemento
+        function select(num){
+            document.getElementById('botao').innerHTML = "atualizar"
+            document.getElementById('botao').value = num
+            document.getElementById('nome-input').value = data[num].nome
+            document.getElementById('idade-input').value = data[num].idade
+        }
+        function update(){
+            let num = document.getElementById('botao').value
+
+            let nome = document.getElementById('nome-input').value
+            let idade = document.getElementById('idade-input').value
+
+            data.splice(num,1,{"nome":nome,"idade":idade})
+
+            document.getElementById('botao').innerHTML = "Enviar"
+            printar()
+        }
+
+    </script>
+</body>
+</html>

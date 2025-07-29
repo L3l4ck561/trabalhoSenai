@@ -1,0 +1,44 @@
+Protocolo HTTP (Hipertext Transfer Protocol)
+É a base da comunicação na Web, permitindo a troca
+de dados entre clientes e servidores.
+
+Métodos HTTP
+
+GET = Usado para recuperar infrmações de um servidor.
+Ex.:
+curl - x Get "https://api.exemplo.com/usuarios"
+
+POST = Usado para enviar dados ao servidor e criar um novo recurso.
+Ex.:
+curl -X POST "https://api.exemplo.com/usuarios" -d '{"nome": "Carlos"}' -H "Content-Type: application/json"
+
+PUT = Usado para atualizar um recurso existente.
+Ex.:
+curl -X POST "https://api.exemplo.com/usuarios/1" -d '{"nome": "Carlos Silva"}' -H "Content-Type: application/json"
+
+DELETE = Usado para remover um recurso existente.
+Ex.:
+curl -X DELETE "https://api.exemplo.com/usuarios/1"
+
+PATCH = Usado para modificar parcialmente um recurso.
+Ex.:
+curl -X PATCH "https://api.exemplo.com/usuarios/1" -d '{"idade": 35} -H "Content-Type: application/json"
+
+OPTIONS = Usado para obter informações sobre os métodos suportados por um servidor.
+EX.:
+curl -X OPTIONS "https://api.exemplo.com/usuarios"
+
+Tipos de passagem de parâmetros
+
+Query parameters = São passados na URL após um ?
+Ex.:
+GET "https://api.exemplo.com/usuarios?idade=30"
+
+Body parameters = São passados no corpo da requisição,
+geralmente em formato JSON
+Ex.:
+curl -X POST "https://api.exemplo.com/usuarios" -d '{"nome": "Carlos"}' -H "Content-Type: application/json"
+
+
+exemplo pratico
+curl -X POST http://127.0.0.1:5000/produto -H "Content-Type: application/json" -d '{"id": 2,"nome": "Produto b", "preco": 200.00}'

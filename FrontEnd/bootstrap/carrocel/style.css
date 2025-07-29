@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Posicione o contêiner de imagem (necessário para posicionar as setas esquerda e direita) */
+.container {
+  position: relative;
+}
+
+/* Ocultar as imagens por padrão */
+.mySlides {
+  display: none;
+}
+
+/* Adicione um ponteiro ao passar o mouse sobre as imagens em miniatura */
+.cursor {
+  cursor: pointer;
+}
+
+/* Botões Próximo e anterior */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+
+}
+
+/* Posicione o "botão seguinte" à direita */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Ao passar o mouse, adicione uma cor de fundo preta com um pouco de transparência */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Texto numérico (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Contêiner para texto da imagem */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Seis colunas lado a lado */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Adição de um efeito de transparência para imagens thumnbail */.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}

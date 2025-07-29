@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Alunos</title>
+    {% if cor == "NOITE" %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styleDark.css') }}">
+    {% endif %}
+</head>
+<body>
+    <a href="/cor"><b>{{cor}}</b></a>
+
+    <h1>Gestão de Alunos</h1>
+    <div class="container">
+        <!-- Formulário para adicionar aluno -->
+        <div class="form-container">
+            <h2>Adicionar Aluno</h2>
+            <input type="text" id="nome" placeholder="Nome do aluno">
+            <input type="number" id="nota" placeholder="Nota do aluno" step="0.1">
+            <button onclick="adicionarAluno()">Adicionar</button>
+        </div>
+
+        <!-- Lista de alunos -->
+        <div class="lista-container">
+            <h2>Lista de Alunos</h2>
+            <ul id="lista-alunos"></ul>
+        </div>
+
+        <!-- Consultar/Alterar/Apagar aluno -->
+        <div class="form-container">
+            <h2>Consultar/Alterar/Apagar Aluno</h2>
+            <input type="text" id="consulta-nome" placeholder="Nome do aluno">
+            <button onclick="consultarAluno()">Consultar</button>
+            <button onclick="alterarAluno()">Alterar Nota</button>
+            <button onclick="apagarAluno()">Apagar</button>
+            <p id="resultado-consulta"></p>
+        </div>
+
+        <!-- Média da turma -->
+        <div class="media-container">
+            <h2>Média da Turma</h2>
+            <button onclick="calcularMedia()">Calcular Média</button>
+            <p id="resultado-media"></p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

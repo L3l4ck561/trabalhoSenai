@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Inscrever Participantes</h2>
+    <form method="post">
+        <select name="participante_id" class="form-control mb-2" required>
+            <option value="">Selecione um Participante</option>
+            {% for participante in participantes %}
+                <option value="{{ participante[0] }}">{{ participante[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="evento_id" class="form-control mb-2" required>
+            <option value="">Selecione um Evento</option>
+            {% for evento in eventos %}
+                <option value="{{ evento[0] }}">{{ evento[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-primary">Inscrever</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,114 @@
+/* Estiliza o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #eee;
+}
+
+h1{
+    max-width: 180%;
+}
+
+/* Título */
+h1, h2 {
+    color: #555;
+    text-align: center;
+}
+
+/* Formulário */
+form {
+    background-color: #fff;
+    padding: 20px;
+
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgba(47, 48, 42, 0.7);
+    margin-bottom: 20px;
+}
+
+/* Labels e inputs */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botões do formulário */
+form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}
+
+form button[type="submit"] {
+    background-color: #535353;
+    color: white;
+    
+}
+
+#btn-cancelar {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #ccc;
+    color: black;
+}
+
+/* Botões da tabela */
+.btn-editar {
+    background-color: #3c3c3c;
+    color:white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}

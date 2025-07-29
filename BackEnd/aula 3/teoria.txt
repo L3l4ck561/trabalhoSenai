@@ -1,0 +1,165 @@
+Programação Orientada a Objetos (POO) com Python.
+
+O que este projeto ensina?
+- Conceitos básicos de POO- Classes e Objetos
+- Encapsulamento (_nome)
+- Herença e Polimorfismo
+- Métodos especiais (init, str)
+- Uso de módulos e pacotes (models, controllers)
+- Banco de dados SQLite inragrado.
+
+1 - Conceitos Básicos da POO 
+Programação Orientada a Objetos (POO) é um paradigma que organiza o código em objetos, facilitando o reaproveitamento e a manutenção do código. Os principais
+conceito são:
+
+*Classe: Modelo para criar objetos
+*OBjeto: Instância de uma classe, com atributos e métodos.
+*Encapsulamento: Proteção dos atributos e métodos internos.
+*Herença: Permite que uma classe herde características de outra.
+*Polimorfismo: Permite que métodos tenham comportamentos diferente em classes diferentes.
+
+Exemplo de Classe e  Objeto.
+
+classe Pessoa:
+    def __init__ (self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+
+    def apresentar(self):
+        return f"Olá, meu nome é {self.nome} e tenho
+        {self.idade} anos!"
+
+#Criando um objeto
+pessoa1 = Pessoa ("Carlos", 18)
+print (pessoa1.apresentar())
+
+2 - Classes e Objetos
+Uma classe define um modelo de um objeto.
+Um objeto é uma instância dessa classe.
+
+Exemplo:
+
+class Carro:
+    def __init__ (self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def detalhes(self):
+        return f"O carro é um {self.marca} {self.modelo}."
+
+#Criando um objeto da classe Carro
+meu_carro = Carro("Toyota", "Corolla")
+print (meu_carro.detalhes())
+
+3 - Encapsulamento protege os dados internos do objeto. Em python, utilizamos:
+
+* public(padrao) ==> self.atributo 
+*protected(uso interno) ==> self._atributo
+*private(totalmente privado) ==> self.__atributo
+
+Exemplo:
+Class ContaBancaria:
+    def __init__ (self, titular, saldo):
+        self.titular = titular
+        self.__saldo = saldo #Atributo privado
+    
+    def exibir_saldo(self):
+    return f"Saldo de {self.titular}: R$ {self.__saldo}"
+
+conta = ContaBancaria ("Helder", 1000)
+print(conta.exibir_saldo())
+
+4 - Herença e Polimorfismo
+A herança permite que uma classe filha herde atributos e métodos de uma classe pai.
+
+Exemplo de Herança
+
+class Animal
+    def fazer_som(self):
+        return "Som genérico de animal"
+
+class Cachorro(Animal):
+    def fazer_som(self)
+        return "Au Au!"
+
+meu_cachorro = Cachorro()
+print (meu_cachorro.fazer_som())
+
+#Aqui, a classe Cachorro sobscreve o método fazer_som.
+#Quando chamamos meu_cachorro.fazer_som(), mesmo que meu_cachorro seja uma instância de Cachorro, ele se comporta diferente da classe Animal
+
+#Isso é Polimorfismo: o mesmo método (fazer_som) tem diferentes implementalçoes dependendo da classe que o define.
+
+#Se tivéssemos outras classes, como Gato(Animal), poderíamos ter diferentes sons para cada animal, mas chamando o mesmo método fazer_som().
+
+5 - Métodos especiais
+Python possui métodos especiais compo
+__init__(construtor) e __str__(representação textual do objeto).
+
+Exemplo:
+class Prduto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+
+    def __str__(self):
+        return f"Produto: {self.nome}, Preço: R$ {self.preco}"
+
+p = Produto("Notebook", 3500)
+print(p)
+
+6 - Uso de Módulos e Pacotes 
+Para organizar melhor o código, usamos módulos
+(arquivos.py) e pacotes (pastas com __init__.py).
+
+Estrutura:
+meu_projeto/
+|--models/
+|       |--aluno.py
+|       |--professor.py
+|--controllers/
+|       |--banco.py
+|--main.py
+
+O import nos ajuda a reutilizar o código:
+
+from models.aluno import aluno
+from controllers.banco import Banco
+
+
+
+
+
+class ContaBancaria:
+    def __init__(self, titular, saldo):
+        self.titular = titular
+        self.__saldo = saldo  # Atributo privado
+
+    # Método para acessar o saldo (getter)
+    def get_saldo(self):
+        return self.__saldo
+    
+    # Método para alterar o saldo (setter)
+    def set_saldo(self, valor):
+        if valor >= 0:
+            self.__saldo = valor
+        else:
+            print("Saldo não pode ser negativo!")
+    
+    # Método para exibir o saldo
+    def exibir_saldo(self):
+        return f"Saldo de {self.titular}: R$ {self.__saldo}"
+
+# Testando a classe
+conta = ContaBancaria("Helder", 1000)
+print(conta.exibir_saldo())  # Exibe o saldo inicial
+
+# Acessando o saldo usando o método getter
+print("Saldo atual:", conta.get_saldo())
+
+# Tentando alterar o saldo com o setter
+conta.set_saldo(1500)
+print(conta.exibir_saldo())  # Exibe o saldo após alteração
+
+# Tentando definir um saldo negativo
+conta.set_saldo(-500)  # Exibe a mensagem de erro

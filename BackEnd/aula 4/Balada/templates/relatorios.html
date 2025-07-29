@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
+</head>
+<body>
+    <h1>Relatórios</h1>
+
+    <h2>Eventos e Quantidade de Inscritos</h2>
+    <table border="1">
+        <tr>
+            <th>Evento</th>
+            <th>Inscritos</th>
+        </tr>
+        {% for evento in eventos_inscricoes %}
+        <tr>
+            <td>{{ evento[0] }}</td>  <!-- Nome do evento -->
+            <td>{{ evento[1] }}</td>  <!-- Quantidade de inscritos -->
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="2">Nenhum evento cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Participantes e Eventos em que estão Inscritos</h2>
+    <table border="1">
+        <tr>
+            <th>Participante</th>
+            <th>Evento</th>
+        </tr>
+        {% for participante in participantes_eventos %}
+        <tr>
+            <td>{{ participante[0] }}</td>  <!-- Nome do participante -->
+            <td>{{ participante[1] }}</td>  <!-- Nome do evento -->
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="2">Nenhum participante inscrito em eventos.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

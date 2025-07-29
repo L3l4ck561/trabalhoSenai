@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elementos Grid</title>
+    <style>
+        .container{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: aqua;
+            padding: 10px;
+        }
+        .item{
+            font-size: 30px;
+            background-color: lightgray;
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid Layout</h1>
+
+    <p>Um Grid Layout deve ter um elemento pai com o display configurado como grid.</p>
+
+    <p>O Elemento filho automaticamente pertencerá ao elemento pai configurado anteriormente.</p>
+
+    <div class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Templates Areas</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body { font-family: "Lucida Sans", sans-serif; }
+        .grid-container{
+            display: grid;
+            grid-template-areas: 
+            'header header header header header header'
+            'menu main main main main right'
+            "footer footer footer footer footer footer"
+            ;
+            gap: 10px;
+            padding: 5px;
+        }
+
+        .grid-container > div.header{
+            grid-area:header;
+            text-align: center;
+            background-color: blue;
+            color: white;
+        }
+        .grid-container > div.menu{
+            grid-area:menu;
+
+        }
+        .menu li{
+            background-color: yellow;
+            list-style-type: none;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        .grid-container > div.main{
+            grid-area:main;
+
+        }
+        .grid-container > div.right{
+            grid-area:right;
+            border: 2px solid blue;
+            padding: 5px;
+        }
+        .grid-container > div.footer{
+            grid-area:footer;
+            text-align: center;
+            background-color: blue;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-areas:
+                    "header"
+                    "menu"
+                    "main"
+                    "right"
+                    "footer";
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="header"><h1>Estocolmo</h1></div>
+        <div class="menu">
+            <ul>
+                <li>A História</li>
+                <li>A Cidade</li>
+                <li>O Arquipélago</li>
+                <li>A Cultura</li>
+            </ul>
+        </div>
+        <div class="main">
+            <h2>A Cidade</h2>
+            <p>Estocolmo, a capital da Suécia, é uma cidade construída sobre 14 ilhas, conectadas por mais de 50 pontes. É conhecida por sua beleza natural e sua rica hitória.</p>
+            <p>A cidade possui uma mistura fascinante de arquitetura medieval e desing moderno. Camla Stan, a cidade velha, oferece ruas de paralepípedos, edifícios coloridos e a atmosfera vibrante de uma época passada.</p>
+            <p>Estocolmo se estende ao longo da costa leste da Suécia, onde o lago Malaren encontra o Mar Báltico.</p>
+        </div>
+        <div class="right">
+            <h3>Fotos:</h3>
+            <ul>
+                <li>Estocolmo é a capital da Suêcia.</li>
+                <li>A Suécia é um país escandinavo no norte da Europa.</li>
+            </ul>
+        </div>
+        <div class="footer">Redimensione a janela do navegador para ver como oconteúdo se adapta ao dimensionamento</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da velha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <h1>Jogo da Velha</h1>
+    <p>Jogador atual: <span id="jogador-atual">X</span></p>
+    <div class="board" id="tabuleiro">
+        <!-- células do tabuleiro -->
+         <div class="celula" data-index="0"></div>
+         <div class="celula" data-index="1"></div>
+         <div class="celula" data-index="2"></div>
+         <div class="celula" data-index="3"></div>
+         <div class="celula" data-index="4"></div>
+         <div class="celula" data-index="5"></div>
+         <div class="celula" data-index="6"></div>
+         <div class="celula" data-index="7"></div>
+         <div class="celula" data-index="8"></div>
+    </div>
+    <h2 id="mensagem"></h2>
+    
+    <div class="box-placar">
+        <div class="placar">
+            <h1 style="color: aliceblue;">Placar</h1>
+            <table>
+                <tr class="head">
+                    <th class="hc">jogador</th>
+                    <th class="hc">pontuação</th>
+                </tr>
+                <tr>
+                    <th id="primeiro">1º O & X</th>
+                    <td id="ponto1">0</td>
+                </tr>
+                <tr>
+                    <th id="segundo"></th>
+                    <td id="ponto2"></td>
+                </tr>
+            </table>
+        </div>
+        <button onclick="reiniciar()">Reiniciar</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js')}}"></script>
+</body>
+</html>
