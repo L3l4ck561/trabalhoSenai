@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "projeto_2_sem",
-    "slug": "projeto_2_sem",
+    "name": "Géo Localização",
+    "slug": "GeoLocalizacao",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

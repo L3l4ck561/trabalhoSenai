@@ -1,0 +1,103 @@
+.container-gerador {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.formulario, .preview {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.formulario h2, .preview h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.formulario label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formulario input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.formulario button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.formulario button:hover {
+  background-color: #c0392b;
+}
+
+.cracha {
+  background-color: #f0f8ff;
+  border: 2px solid #2a9d8f;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cracha-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #2a9d8f;
+  object-fit: cover;
+}
+
+.cracha-nome {
+  margin: 15px 0 5px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.cracha-cargo {
+  margin: 0;
+  font-size: 1.1em;
+  color: #555;
+}
+
+.botao-imprimir {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.botao-imprimir:hover {
+  background-color: #2980b9;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
