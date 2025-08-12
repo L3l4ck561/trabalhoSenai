@@ -1,0 +1,202 @@
+import './App.css';
+import React, { useState } from "react"
+
+function App() {
+
+  // Array vazio que vai armazenar temporariamente os comentários
+  const [comentarios, setComentarios] = useState([]);
+  const [novoComentario, setNovoComentario] = useState("")
+  const [hoveredId, setHoveredId] = useState(null)
+  const [imagemPostada, setImagemPostada] = useState(null)
+
+  const pegandoTexto = (evento) => {
+    setNovoComentario(evento.target.value);
+  }
+
+  const submeter = (evento) => {
+    evento.preventDefault();
+    if (novoComentario.trim() === "") return;
+    const novoItem = {
+      id: Date.now(),
+      texto: novoComentario
+    }
+
+    setComentarios([...comentarios, novoItem])
+
+    setNovoComentario("")
+  }
+
+  const excluir = (idExcluir) => {
+    const novaLista = comentarios.filter(comentario => comentario.id !== idExcluir);
+    setComentarios(novaLista)
+  };
+
+  const imagemUpload = (evento) => {
+    const arquivo = evento.target.files[0];
+    if (arquivo) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagemPostada(reader.result);
+      }
+      reader.readAsDataURL(arquivo)
+    }
+  }
+
+  return (
+    <div className='caixa-comentario-container'>
+      {!imagemPostada ? (
+        <div className='upload-container'>
+          <h2>Feed</h2>
+          <p>Selecione uma imagem</p>
+          <label htmlFor='file-upload' className='custom-file-upload'>
+            Escolha sua foto
+          </label>
+          <input id="file-upload" type="file" accept='image/*' onChange={imagemUpload} />
+        </div>
+      ) :
+        <>
+        <div className='post-container'>
+          <img src={imagemPostada} alt='Post do Usuário' className='imagem-postada' />
+        </div>
+          <h2>Deixe seu comentário</h2>
+
+          <form className='comentario-form' onSubmit={submeter}>
+            <textarea
+              placeholder='O que você está pensando?'
+              value={novoComentario}
+              onChange={pegandoTexto}
+            />
+            <button type='submit'>Comentar</button>
+          </form>
+
+          <div className='lista-comentarios'>
+            <h3>Comentários</h3>
+
+            {comentarios.map((comentario) => (
+              <div
+                className='comentario-item'
+                key={comentario.id}
+                onMouseOver={() => setHoveredId(comentario.id)}
+                onMouseOut={() => setHoveredId(null)}
+              >
+                <p>{comentario.texto}</p>
+                {hoveredId === comentario.id && (
+                  <button className='botao-excluir' onClick={() => excluir(comentario.id)}>
+                    X
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      }
+    </div>
+  );
+}
+
+export default App;
+
+
+-------------------------------------------------------------------------------------------------------
+
+.caixa-comentarios-container {
+  width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.comentario-form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.comentario-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.lista-comentarios {
+  margin-top: 30px;
+}
+
+.comentario-item {
+  position: relative;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.comentario-item p {
+  margin: 0;
+}
+
+.botao-excluir {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.upload-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.upload-container input[type="file"] {
+  display: none; // Esconde o input padrão
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
+}
+
+.post-container {
+  margin-bottom: 20px;
+}
+
+.imagem-postada {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
