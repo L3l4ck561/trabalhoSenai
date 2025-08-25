@@ -1,0 +1,141 @@
+.buscador-container-p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border: 1px solid #000;
+}
+
+.buscador-container-p form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('./pokebola.png');
+  background-size: cover;
+
+  border-radius: 50%;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  height: 300px;
+}
+
+.buscador-container-p form input {
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  outline: none;
+  padding: 5px;
+  border: 1px solid #555;
+  width: 60px;
+  height: 30px;
+}
+
+.buscador-container-p form input:focus {
+  animation: ativo forwards 0.5s;
+}
+
+.buscador-container-p form button {
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border: 1px solid #555;
+  padding: 5px;
+  width: 70px;
+}
+
+@keyframes ativo {
+  0% {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    width: 30px;
+  }
+
+  100% {
+    width: 63%;
+    border-radius: 20px;
+  }
+}
+
+
+.App-logo {
+  height: 5vmin;
+  pointer-events: none;
+  margin: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 0.5s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+* Cores para alguns tipos de Pokémon */ .tipo.grass {
+  background-color: #78C850;
+}
+
+.tipo.fire {
+  background-color: #F08030;
+}
+
+.tipo.water {
+  background-color: #6890F0;
+}
+
+.tipo.bug {
+  background-color: #A8B820;
+}
+
+.tipo.normal {
+  background-color: #A8A878;
+}
+
+.tipo.poison {
+  background-color: #A040A0;
+}
+
+.tipo.electric {
+  background-color: #F8D030;
+}
+
+.tipo.ground {
+  background-color: #E0C068;
+}
+
+.tipo.fairy {
+  background-color: #EE99AC;
+}
+
+.tipo.fighting {
+  background-color: #C03028;
+}
+
+.tipo.psychic {
+  background-color: #F85888;
+}
+
+.tipo.rock {
+  background-color: #B8A038;
+}
+
+.tipo.ghost {
+  background-color: #705898;
+}
+
+.tipo.ice {
+  background-color: #98D8D8;
+}
+
+.tipo.dragon {
+  background-color: #7038F8;
+}

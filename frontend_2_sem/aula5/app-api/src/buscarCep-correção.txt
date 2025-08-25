@@ -1,0 +1,153 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './App.css';
+
+function BuscadorCep() {
+  const [cep, setCep] = useState('');
+  const [logradouro, setLogradouro] = useState('');
+  const [numero, setNumero] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [uf, setUf] = useState('');
+  
+  const [erro, setErro] = useState(null);
+
+  useEffect(() => {
+    const cepLimpo = cep.replace(/\D/g, '');
+
+    if (cepLimpo.length !== 8) {
+      return;
+    }
+
+    const buscarDados = async () => {
+      setErro(null);
+      try {
+        const resposta = await axios.get(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+        if (resposta.data.erro) {
+          throw new Error('CEP não encontrado!');
+        }
+
+        setLogradouro(resposta.data.logradouro || '');
+        setBairro(resposta.data.bairro || '');
+        setCidade(resposta.data.localidade || '');
+        setUf(resposta.data.uf || '');
+
+      } catch (error) {
+        setErro('CEP não encontrado ou inválido!');
+      }
+    };
+
+    buscarDados();
+  }, [cep]);
+
+  const handleSend = (evento) => {
+    evento.preventDefault();
+    if (!logradouro || !bairro || !cidade || !uf || !numero) {
+      alert('Por favor, preencha todos os campos obrigatórios antes de enviar.');
+      return;
+    }
+    
+    const dadosCompletos = {
+      cep,
+      logradouro,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      uf,
+    };
+
+    console.log("Dados a serem enviados:", dadosCompletos);
+    alert(`Dados enviados com Sucesso! Verifique o console.`);
+  };
+
+  const limparFormulario = () => {
+    setCep('');
+    setLogradouro('');
+    setNumero('');
+    setComplemento('');
+    setBairro('');
+    setCidade('');
+    setUf('');
+    setErro(null);
+  };
+
+  return (
+    <main className="buscador-container">
+      <h1>Dados cadastrais</h1>
+      <section className="input-container">
+        <form className="buscador-form" onSubmit={handleSend}>
+          <div className="endereco-form-card">
+            {erro && <p className="erro">{erro}</p>}
+
+            <label htmlFor="cep">CEP:</label>
+            <input
+              id="cep"
+              type="text"
+              value={cep}
+              onChange={(e) => setCep(e.target.value)}
+              placeholder="Digite um CEP"
+              maxLength="9"
+            />
+
+            <label htmlFor="logradouro">Logradouro:</label>
+            <input 
+              id="logradouro" 
+              type="text" 
+              value={logradouro} 
+              onChange={(e) => setLogradouro(e.target.value)} 
+            />
+
+            <label htmlFor="numero">Número:</label>
+            <input 
+              id="numero" 
+              type="text" 
+              value={numero} 
+              onChange={(e) => setNumero(e.target.value)} 
+            />
+
+            <label htmlFor="complemento">Complemento:</label>
+            <input 
+              id="complemento" 
+              type="text" 
+              value={complemento} 
+              onChange={(e) => setComplemento(e.target.value)} 
+            />
+
+            <label htmlFor="bairro">Bairro:</label>
+            <input 
+              id="bairro" 
+              type="text" 
+              value={bairro} 
+              onChange={(e) => setBairro(e.target.value)} 
+            />
+
+            <label htmlFor="cidade">Cidade:</label>
+            <input 
+              id="cidade" 
+              type="text" 
+              value={cidade} 
+              onChange={(e) => setCidade(e.target.value)} 
+            />
+
+            <label htmlFor="estado">Estado:</label>
+            <input 
+              id="estado" 
+              type="text" 
+              value={uf} 
+              onChange={(e) => setUf(e.target.value)} 
+            />
+            
+            <div className="botoes-container">
+              <button type="submit">Enviar</button>
+              <button type="button" onClick={limparFormulario}>Limpar</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+  );
+}
+
+export default BuscadorCep;

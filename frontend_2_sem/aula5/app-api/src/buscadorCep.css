@@ -1,0 +1,41 @@
+.buscador-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border: 1px solid #000;
+}
+
+.resultado-endereco p{
+    background-color: #ddd;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 3px;
+}
+.buscador-container form{
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.buscador-container form input{
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.buscador-container form button{
+    background-color: aquamarine;
+    padding: 10px;
+    border: none;
+    transition: 0.2s;
+    font-weight: bolder;
+    font-size: 1rem;
+    color: #545;
+    border-radius: 5px;
+}
+.buscador-container form button:hover{
+    background-color: rgb(168, 255, 226);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
