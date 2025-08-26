@@ -8,9 +8,11 @@ import {
   Button,
   FlatList,
   SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import { getUsers, addUser, updateUser, deleteUser } from '../database/userDatabase';
 import UserItem from '../components/UserItem';
+import { router } from "expo-router"
 
 
 export default function UserRegistrationScreen() {
@@ -41,7 +43,7 @@ export default function UserRegistrationScreen() {
       // Modo de Adição
       addUser(name, cpf);
     }
-    
+
     // Limpa os campos e recarrega a lista
     setName('');
     setCpf('');
@@ -66,10 +68,14 @@ export default function UserRegistrationScreen() {
     setEditingUserId(null);
   }
 
+  const Logar = () => {
+    router.replace("../../auth/login")
+  }
   return (
     <SafeAreaView style={styles.container}>
+
       <Text style={styles.title}>Registo de Utilizadores</Text>
-      
+
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
@@ -84,15 +90,21 @@ export default function UserRegistrationScreen() {
           onChangeText={setCpf}
           keyboardType="numeric"
         />
-        <Button 
-          title={editingUserId ? 'Atualizar Utilizador' : 'Adicionar Utilizador'} 
-          onPress={handleSave} 
+        <Button
+          title={editingUserId ? 'Atualizar Utilizador' : 'Adicionar Utilizador'}
+          onPress={handleSave}
         />
         {editingUserId && (
-          <View style={{marginTop: 10}}>
+          <View style={{ marginTop: 10 }}>
             <Button title="Cancelar Edição" onPress={handleCancelEdit} color="red" />
           </View>
         )}
+      </View>
+
+            <View style={{alignItems:'flex-end'}}>
+        <TouchableOpacity onPress={Logar}>
+          <Text style={styles.voltar}>voltar</Text>
+        </TouchableOpacity>
       </View>
 
       <FlatList
@@ -122,13 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom:20,
   },
   formContainer: {
     backgroundColor: 'white',
     padding: 15,
     borderRadius: 8,
-    marginBottom: 20,
+    marginBottom: 10,
     borderWidth: 1,
     borderColor: '#ddd',
   },
@@ -150,4 +163,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: '#888',
   },
+  voltar: {
+    borderRadius: 10,
+    backgroundColor: '#555',
+    color:'white',
+    marginBottom:0,
+    padding:5
+  }
 });

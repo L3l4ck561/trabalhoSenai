@@ -4,5 +4,5 @@ import {setupUserDatabase} from "./src/database/userDatabase"
 setupUserDatabase();
 
 export default function RootLayout() {
-  return <Stack />;
+  return <Stack screenOptions={{ headerShown: false }}/>;
 }

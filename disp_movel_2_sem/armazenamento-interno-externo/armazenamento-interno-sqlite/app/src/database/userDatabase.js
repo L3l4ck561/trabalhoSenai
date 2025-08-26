@@ -55,3 +55,13 @@ export function deleteUser (id) {
         console.error(`Erro ao deletar o usuário. ${error}`)
     }
 }
+
+// função para trazer o cpf do usuario para o login
+export function getUsersByCpf (cpf){
+    try {
+        return db.getFirstSync('SELECT * FROM users WHERE cpf = ?;', [cpf])
+    } catch (error) {
+        console.error(`Erro ao buscar o cpf do usuário. ${error}`)
+        return null;
+    }
+}
