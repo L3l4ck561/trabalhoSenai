@@ -8,7 +8,7 @@ const db = SQLite.openDatabaseSync('users') // openDatabaseSync - Ele é sincron
 export function setupUserDatabase() {
     // O db.execSync() - Executa um ou mais comandos SQL que não retornam dados ( DROP, DELETE, CREATE, entre outros).
     db.execSync (
-        'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, cpf TEXT);'
+        'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, cpf TEXT, email TEXT);'
     )
 }
 
@@ -24,11 +24,11 @@ export function getUsers() {
 }
 
 // Função para adicionar um novo usuário.
-export function addUser (name, cpf) {
+export function addUser (name, cpf, email) {
     try {
         db.runSync (
             // db.runSync() -  É usado para comandos SQL que modificam ou exibem novos dados ou dados modificados.
-            'INSERT INTO users (name, cpf) VALUES (?, ?);', [name, cpf] // O array [name, cpf] serve para substituir os '?'.
+            'INSERT INTO users (name, cpf, email) VALUES (?, ?, ?);', [name, cpf, email] // O array [name, cpf] serve para substituir os '?'.
         )
     } catch (error) {
         console.error(`Erro ao adicionar usuário: ${error}`)    
@@ -36,10 +36,10 @@ export function addUser (name, cpf) {
 }
 
 // Função para atualizar um usuário existente.
-export function updateUser (id, name, cpf) {
+export function updateUser (id, name, cpf, email) {
     try {
         db.runSync (
-            'UPDATE users SET name = ?, cpf = ? WHERE id = ?', [name, cpf, id]
+            'UPDATE users SET name = ?, cpf = ?, email = ? WHERE id = ?', [name, cpf, email, id]
         )
     } catch (error) {
         console.error(`Erro ao atualizar usuário: ${error}`)

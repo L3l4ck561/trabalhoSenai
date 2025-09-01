@@ -4,7 +4,7 @@ import BuscadorItem from "./pokemon";
 
 function App() {
   return (<>
-  <BuscadorItem/>
+  {/* <BuscadorItem/> */}
   <BuscadorCep/>
   </>)
 }

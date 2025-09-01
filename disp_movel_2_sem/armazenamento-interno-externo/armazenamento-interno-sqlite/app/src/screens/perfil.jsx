@@ -8,14 +8,15 @@ import {
   Button,
   FlatList,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import { getUsers, addUser, updateUser, deleteUser } from '../database/userDatabase';
 import UserItem from '../components/UserItem';
-import { useRouter } from "expo-router"
+import { useRouter, useLocalSearchParams } from "expo-router"
 
 
 export default function UserRegistrationScreen() {
+  const params = useLocalSearchParams()
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,7 +35,7 @@ export default function UserRegistrationScreen() {
 
   const handleSave = () => {
     if (!name.trim() || !cpf.trim() || !email.trim()) {
-      alert('Erro', 'Nome, Email e CPF são obrigatórios.');
+      alert('Erro', 'Nome e CPF são obrigatórios.');
       return;
     }
 
@@ -44,7 +45,6 @@ export default function UserRegistrationScreen() {
     } else {
       // Modo de Adição
       addUser(name, cpf, email);
-      alert(`registro de "${name}" foi realizado com sucesso!`)
     }
 
     // Limpa os campos e recarrega a lista
@@ -57,6 +57,7 @@ export default function UserRegistrationScreen() {
 
   const handleEdit = (user) => {
     setName(user.name);
+    setEmail(user.email);
     setCpf(user.cpf);
     setEditingUserId(user.id);
   };
@@ -74,22 +75,26 @@ export default function UserRegistrationScreen() {
   }
   return (
     <SafeAreaView style={styles.container}>
+      <View style={style.header}>
+        <Text style={style.title}>Bem vindo(a)! {params.name}</Text>
+        <Button title='Sair' onPress={() => router.replace('/')}></Button>
+      </View>
 
-      <Text style={styles.title}>Registo de Utilizadores</Text>
-
-      <View style={styles.formContainer}>
+      <View style={{padding:20}}>
+      {editingUserId ? 
+<View style={styles.formContainer}>
         <TextInput
           style={styles.input}
           placeholder="Nome completo"
           value={name}
           onChangeText={setName}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-        />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Email"
+                  value={email}
+                  onChangeText={setEmail}
+                />
         <TextInput
           style={styles.input}
           placeholder="CPF"
@@ -98,7 +103,7 @@ export default function UserRegistrationScreen() {
           keyboardType="numeric"
         />
         <Button
-          title={editingUserId ? 'Atualizar Utilizador' : 'Adicionar Utilizador'}
+          title='Atualizar Utilizador'
           onPress={handleSave}
         />
         {editingUserId && (
@@ -107,14 +112,10 @@ export default function UserRegistrationScreen() {
           </View>
         )}
       </View>
+      : <></>}
+      
 
-      <View style={{ alignItems: 'flex-end' }}>
-        <TouchableOpacity onPress={() => router.replace('/')}>
-          <Text style={styles.voltar}>voltar</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* <FlatList
+      <FlatList
         data={users}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
@@ -126,29 +127,55 @@ export default function UserRegistrationScreen() {
         )}
         ListHeaderComponent={<Text style={styles.listTitle}>Utilizadores Registados</Text>}
         ListEmptyComponent={<Text style={styles.emptyText}>Nenhum utilizador registado.</Text>}
-      /> */}
+      />
+      </View>
     </SafeAreaView>
   );
 }
+
+const style = StyleSheet.create({
+    header:{
+        backgroundColor:'#4ea4ebff',
+        paddingTop:40,
+    },
+    containerLogin: {
+        padding: 20,
+        width: '90%',
+        boxShadow: '0 5px 15px rgba(0,0,0,0.5)',
+        borderRadius: 10,
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        color:'#fff',
+        marginLeft:10
+    },
+    input: {
+        padding: 5,
+        borderRadius: 10,
+        width: '100%',
+        marginBottom: 10,
+        borderBottomWidth: 2,
+        borderRightWidth: 2,
+        borderTopWidth: 2,
+        borderLeftWidth: 2,
+        borderColor: "rgba(65, 65, 65, 0.5)",
+    },
+})
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    padding: 20,
-
-    alignItems: "center",
-    justifyContent: 'center'
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
     marginBottom: 20,
   },
   formContainer: {
-    width: '90%',
     backgroundColor: 'white',
     padding: 15,
     borderRadius: 8,

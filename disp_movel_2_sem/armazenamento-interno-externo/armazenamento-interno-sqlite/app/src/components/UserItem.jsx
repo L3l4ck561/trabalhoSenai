@@ -8,6 +8,7 @@ export default function UserItem({ user, onEdit, onDelete }) {
       <View style={styles.userInfo}>
         <Text style={styles.userName}>{user.name}</Text>
         <Text style={styles.userCpf}>CPF: {user.cpf}</Text>
+        <Text style={styles.userCpf}>Email: {user.email}</Text>
       </View>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button} onPress={onEdit}>

@@ -1,12 +1,12 @@
-import { Text, View, StyleSheet, TextInput, Button } from "react-native";
-import { useRouter, Link } from "expo-router"
+import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router"
 import { useState } from "react";
 import { getUsersByCpf } from "../../database/userDatabase";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
     const [cpf, setCpf] = useState('')
-    const router = useRouter()
+    const router = useRouter();
 
     const handleLogin = () => {
         if (!cpf.trim()) {
@@ -15,7 +15,7 @@ export default function Login() {
         }
         const user = getUsersByCpf(cpf)
         if (user) {
-            router.push({ pathname: './perfil', params: { nome: user.name } })
+            router.push({ pathname: './src/screens/perfil', params: { name: user.name } })
         } else {
             alert('falha no Login. Tente novamente')
         }
@@ -31,13 +31,14 @@ export default function Login() {
                     placeholder="Digite seu CPF"
                     value={cpf}
                     onChangeText={setCpf}
+                    keyboardType="numeric"
                 />
                 <Button title='Entrar' color={'green'} onPress={handleLogin} />
                 <View style={{ alignItems: 'flex-end', marginTop: 10 }}>
 
-                    <Link href="./UserRegistrationSreen" style={{ color: 'blue' }}>
-                        Cadastre-se
-                    </Link>
+                    <TouchableOpacity onPress={() => router.replace('./src/screens/UserRegistrationSreen')}>
+                        <Text style={{ color: 'blue' }}>Cadastre-se</Text>
+                    </TouchableOpacity>
 
                 </View>
 
