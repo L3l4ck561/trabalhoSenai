@@ -1,6 +1,6 @@
 // importando a biblioteca mysql2/promise para usar async/await com MySQL
 
-const mysql = request("mysql2/promise");
+const mysql = require("mysql2/promise");
 
 // importando a biblioteca da variavél de ambiente
 
@@ -19,4 +19,4 @@ const pool = mysql.createPool({
 })
 
 // exporta o pool para que possa ser utilizado em outros arquivos
-modulo.exports = pool
+module.exports = pool

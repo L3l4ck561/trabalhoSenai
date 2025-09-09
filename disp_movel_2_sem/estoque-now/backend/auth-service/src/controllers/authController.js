@@ -1,4 +1,3 @@
-// authController.js
 // Importa o pool de conexões com a base de dados que configurámos.
 const pool = require('../config/database');
 // Importa a biblioteca bcrypt para encriptação de senhas.
@@ -26,16 +25,16 @@ exports.register = async (req, res) => {
     // Executa o comando SQL para inserir o novo utilizador na base de dados.
     // Os '?' são substituídos de forma segura pelos valores no array para prevenir SQL Injection.
     await pool.query(
-      'INSERT INTO users (nome, email, idade, photo_url, security_question, security_answer_hash, password_hash) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO users (nome, email, idade, photo_url_url, security_question, security_answer_hash, password_hash) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [nome, email, idade, photo_url, security_question, securityAnswerHash, passwordHash]
     );
 
     // Se a inserção for bem-sucedida, envia uma resposta de sucesso.
-    res.status(201).json({ message: 'Utilizador registado com sucesso!' });
+    res.status(201).json({ phmessage: 'Utilizador registado com sucesso!' });
   } catch (error) {
     // Se ocorrer um erro (ex: email duplicado), envia uma resposta de erro.
     console.error('Erro no registo:', error);
-    res.status(500).json({ message: 'Erro ao registar utilizador. O email pode já estar em uso.' });
+    res.status(500).json({ phmessage: 'Erro ao registar utilizador. O email pode já estar em uso.' });
   }
 };
 
@@ -51,7 +50,7 @@ exports.login = async (req, res) => {
 
     // Se nenhum utilizador for encontrado, envia um erro de credenciais inválidas.
     if (!user) {
-      return res.status(401).json({ message: 'Email ou senha inválidos.' });
+      return res.status(401).json({ phmessage: 'Email ou senha inválidos.' });
     }
 
     // Compara a senha fornecida pelo utilizador com o hash guardado na base de dados.
@@ -59,13 +58,13 @@ exports.login = async (req, res) => {
 
     // Se as senhas não corresponderem, envia um erro de credenciais inválidas.
     if (!match) {
-      return res.status(401).json({ message: 'Email ou senha inválidos.' });
+      return res.status(401).json({ phmessage: 'Email ou senha inválidos.' });
     }
 
     // Se o login for bem-sucedido, envia uma resposta de sucesso com os dados do utilizador.
     // NUNCA envie a senha ou o hash da senha de volta para o frontend.
     res.status(200).json({
-      message: 'Login bem-sucedido!',
+      phmessage: 'Login bem-sucedido!',
       user: {
         id: user.id,
         nome: user.nome,
@@ -76,7 +75,7 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     console.error('Erro no login:', error);
-    res.status(500).json({ message: 'Erro interno no servidor.' });
+    res.status(500).json({ phmessage: 'Erro interno no servidor.' });
   }
 };
 
@@ -96,7 +95,7 @@ exports.forgotPassword = async (req, res) => {
     if (!user) {
       // Nota: Na prática, para máxima segurança, esta resposta deveria ser 200 OK para não dar pistas.
       // Mas para fins didáticos, 404 é mais claro.
-      return res.status(404).json({ message: 'Utilizador não encontrado.' });
+      return res.status(404).json({ phmessage: 'Utilizador não encontrado.' });
     }
 
     // Se o utilizador for encontrado, devolvemos a sua pergunta de segurança.
@@ -104,7 +103,7 @@ exports.forgotPassword = async (req, res) => {
 
   } catch (error) {
     console.error('Erro em forgotPassword:', error);
-    res.status(500).json({ message: 'Erro interno no servidor.' });
+    res.status(500).json({ phmessage: 'Erro interno no servidor.' });
   }
 };
 
@@ -119,7 +118,7 @@ exports.resetPassword = async (req, res) => {
 
     if (!user) {
       // Novamente, uma resposta genérica por segurança.
-      return res.status(404).json({ message: 'Falha na autenticação.' });
+      return res.status(404).json({ phmessage: 'Falha na autenticação.' });
     }
 
     // Compara a resposta fornecida pelo utilizador com o hash guardado.
@@ -127,7 +126,7 @@ exports.resetPassword = async (req, res) => {
 
     // Se a resposta não corresponder, a operação falha.
     if (!match) {
-      return res.status(401).json({ message: 'A resposta de segurança está incorreta.' });
+      return res.status(401).json({ phmessage: 'A resposta de segurança está incorreta.' });
     }
 
     // Se a resposta estiver correta, encriptamos a nova senha.
@@ -137,10 +136,10 @@ exports.resetPassword = async (req, res) => {
     await pool.query('UPDATE users SET password_hash = ? WHERE email = ?', [newPasswordHash, email]);
 
     // Enviamos uma resposta de sucesso.
-    res.status(200).json({ message: 'Senha redefinida com sucesso!' });
+    res.status(200).json({ phmessage: 'Senha redefinida com sucesso!' });
 
   } catch (error) {
     console.error('Erro em resetPassword:', error);
-    res.status(500).json({ message: 'Erro interno no servidor.' });
+    res.status(500).json({ phmessage: 'Erro interno no servidor.' });
   }
 };
