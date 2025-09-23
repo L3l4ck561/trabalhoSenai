@@ -1,7 +1,6 @@
-// _layout
 // Este ficheiro define o Navegador de Abas (Tabs) que está aninhado dentro do Drawer.
 
-import { Tabs, useRouter } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

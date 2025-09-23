@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <section class="container">
+        <h3>Armazenamento com localStorage</h3>
+        <input class="inputArea" type="text" placeholder="Digite seu nome"><br>
+        <button onclick="salvar()">SALVAR</button>
+        <button onclick="pagar()">APAGAR</button>
+        <hr>
+        <div class="print">resultado...</div>
+    </section>
+    <section class="container">
+        <h3>Armazenamento com sessionStorage</h3>
+        <input class="inputArea" type="text" placeholder="Digite seu nome"><br>
+        <button onclick="salvar(1)">SALVAR</button>
+        <button onclick="pagar(1)">APAGAR</button>
+        <hr>
+        <div class="print">resultado...</div>
+    </section>
+    <section class="container">
+        <h3>Armazenando dados do tipo objeto</h3>
+        <button onclick="salvar(2)">SALVAR</button>
+        <button onclick="pagar(2)">APAGAR</button>
+        <hr>
+        <p class="print">resultado...</p>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>

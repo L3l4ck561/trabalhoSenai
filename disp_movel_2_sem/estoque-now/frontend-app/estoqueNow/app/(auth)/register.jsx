@@ -12,14 +12,16 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
-import AuthContext from '../src/context/AuthContext';
+// import AuthContext from '../src/context/AuthContext';
 import { useRouter } from 'expo-router';
+import { useAuth } from '../src/context/AuthContext'
 
 export default function RegisterScreen() {
   // Obtém a função de registo do nosso contexto de autenticação.
-  const { register } = useContext(AuthContext);
+  // const { register } = useContext(AuthContext);
   // Obtém o router para navegação.
   const router = useRouter();
+  const { onRegister } = useAuth()
 
   // Cria um estado para cada campo do nosso formulário.
   const [name, setName] = useState('');
@@ -48,25 +50,27 @@ export default function RegisterScreen() {
 
     try {
       // Cria o objeto com os dados do utilizador para enviar à API.
-      const userData = {
-        name,
+      const result = await onRegister({
+        nome,
         email,
-        age: parseInt(age, 10), // Converte a idade para um número inteiro.
+        idade: parseInt(age, 10), // Converte a idade para um número inteiro.
         security_question: securityQuestion,
-        security_answer: securityAnswer,
-        password,
-      };
+        security_answer_hash: securityAnswer,
+        password_hash,
+      });
+
+      setIsLoading(false);
 
       // Chama a função 'register' do nosso AuthContext.
-      const response = await register(userData);
+      // const response = await register(userData);
       
       // Se o registo for bem-sucedido, mostra um alerta e navega para o login.
-      Alert.alert('Sucesso!', response.message);
+      Alert.alert('Sucesso!', result.message);
       router.replace('/(auth)'); // 'replace' substitui a tela de registo pela de login.
 
     } catch (error) {
       // Se ocorrer um erro (ex: email já existe), mostra uma mensagem de erro vinda do backend.
-      Alert.alert('Erro no Registo', error.response?.data?.message || 'Ocorreu um erro ao tentar registar.');
+      Alert.alert('Erro no Registo', error.result?.data?.message || 'Ocorreu um erro ao tentar registar.');
     } finally {
       // Desativa o estado de carregamento, independentemente do resultado.
       setIsLoading(false);
