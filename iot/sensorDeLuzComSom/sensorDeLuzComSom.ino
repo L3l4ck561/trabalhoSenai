@@ -1,56 +1,105 @@
-// Inclui a biblioteca para controlar o LCD
-#include <LiquidCrystal.h>;
+#include <WiFi.h>
+#include <WebServer.h>
 
-// Inicializa a biblioteca com os pinos de interface do LCD
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+// 📶 Wi-Fi
+const char* ssid = "SESI-IOT";
+const char* password = "12341234";
 
-// Texto que será exibido e rolado na tela
-const String mensagem = "Palmeiras nao tem mundial!";
+// 🔌 GPIOs dos LEDs
+const int ledVerde = 2;
+const int ledAmarelo = 4;
+const int ledVermelho = 5;
 
-// Variáveis de controle de tempo para a rolagem (usando millis() paranão travar)
-unsigned long tempoAnteriorRolagem = 0;
-const long intervaloRolagem = 300; // Intervalo de 300 milissegundosentre cada passo da rolagem
+// 🌐 Servidor web
+WebServer server(80);
 
-// Variável para controlar a posição da rolagem
-int posicaoAtual = 0;
+// 🖥️ Página HTML estilizada
+const char* htmlPage = R"rawliteral(
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Controle de LEDs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial; text-align: center; background: #f0f0f0; margin-top: 50px; }
+    h1 { color: #333; }
+    .led-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    .verde { background-color: #28a745; }
+    .amarelo { background-color: #ffc107; color: black; }
+    .vermelho { background-color: #dc3545; }
+  </style>
+</head>
+<body>
+  <h1>Controle de LEDs</h1>
+  <div>
+    <button class="led-button verde" onclick="fetch('/verde/on')">Ligar Verde</button>
+    <button class="led-button verde" onclick="fetch('/verde/off')">Desligar Verde</button>
+  </div>
+  <div>
+    <button class="led-button amarelo" onclick="fetch('/amarelo/on')">Ligar Amarelo</button>
+    <button class="led-button amarelo" onclick="fetch('/amarelo/off')">Desligar Amarelo</button>
+  </div>
+  <div>
+    <button class="led-button vermelho" onclick="fetch('/vermelho/on')">Ligar Vermelho</button>
+    <button class="led-button vermelho" onclick="fetch('/vermelho/off')">Desligar Vermelho</button>
+  </div>
+</body>
+</html>
+)rawliteral";
+
+// 🔧 Rotas
+void handleRoot() {
+  server.send(200, "text/html", htmlPage);
+}
+
+void handleLed(int pin, bool estado) {
+  digitalWrite(pin, estado ? HIGH : LOW);
+  server.send(200, "text/plain", estado ? "Ligado" : "Desligado");
+}
 
 void setup() {
-// Define o número de colunas e linhas do LCD
-lcd.begin(16, 2);
+  Serial.begin(115200);
 
-// Exibe a mensagem fixa de boas-vindas na primeira linha (semrolagem)
-lcd.setCursor(0, 0);
-lcd.print(mensagem);
+  // 🧱 Configura os pinos
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledAmarelo, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+  digitalWrite(ledVerde, LOW);
+  digitalWrite(ledAmarelo, LOW);
+  digitalWrite(ledVermelho, LOW);
+
+  // 🌐 Conecta ao Wi-Fi
+  WiFi.begin(ssid, password);
+  Serial.print("Conectando ao Wi-Fi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\n✅ Conectado!");
+  Serial.print("📱 IP: http://");
+  Serial.println(WiFi.localIP());
+
+  // 🚦 Rotas dos LEDs
+  server.on("/", handleRoot);
+  server.on("/verde/on", []() { handleLed(ledVerde, true); });
+  server.on("/verde/off", []() { handleLed(ledVerde, false); });
+  server.on("/amarelo/on", []() { handleLed(ledAmarelo, true); });
+  server.on("/amarelo/off", []() { handleLed(ledAmarelo, false); });
+  server.on("/vermelho/on", []() { handleLed(ledVermelho, true); });
+  server.on("/vermelho/off", []() { handleLed(ledVermelho, false); });
+
+  server.begin();
+  Serial.println("🌐 Servidor iniciado");
 }
 
 void loop() {
-// --- Lógica da Rolagem do Texto na Linha Superior ---
-// Checa se já passou o tempo para o próximo passo da rolagem
-if (millis() - tempoAnteriorRolagem >= intervaloRolagem) {
-tempoAnteriorRolagem = millis(); // Atualiza o tempo
-
-// Move o texto um caractere para a esquerda
-posicaoAtual++;
-
-// Se a rolagem chegou ao fim, reinicia o texto para o início do looping
-if (posicaoAtual > mensagem.length()) {
-posicaoAtual = 0;
-}
-
-// Limpa a primeira linha e exibe a parte correta da mensagem
-lcd.setCursor(0, 0);
-lcd.print("        "); // Limpa a linha
-
-lcd.setCursor(0, 0);
-// Exibe o texto a partir da posição atual
-lcd.print(mensagem.substring(posicaoAtual));
-}
-
-// --- Lógica do Contador de Tempo na Linha Inferior ---
-lcd.setCursor(0, 1);
-int segundos = millis() / 1000;
-
-lcd.print("Tempo: ");
-lcd.print(segundos);
-lcd.print("s   "); // Espaços extras para garantir que a linha sejalimpa
+  server.handleClient();
 }

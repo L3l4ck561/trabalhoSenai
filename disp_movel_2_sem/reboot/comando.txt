@@ -1,0 +1,23 @@
+#cria no backend node js
+$ npm init -y
+
+#dependencias
+https://www.npmjs.com/package/express
+
+$ npm install express
+
+https://www.npmjs.com/package/mysql2
+
+$ npm install --save mysql2
+
+https://www.npmjs.com/package/bcrypt
+
+$ npm install bcrypt
+
+https://www.npmjs.com/package/dotenv
+
+$ npm install dotenv --save
+
+https://www.npmjs.com/package/cors
+
+$ npm install cors

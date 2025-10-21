@@ -1,8 +1,0 @@
-# testes para JS
-https://jestjs.io
-
-# Criando arquivo 'package.json'
-$ npm init -y
-
-# serve para realizar qualquer tipo de teste dentro do projeto
-$ npm install jest --save-dev

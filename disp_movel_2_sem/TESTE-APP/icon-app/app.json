@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "icon-app",
+    "slug": "icon-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon/icon.png",
+    "scheme": "iconapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "icon": {
+        "dark": "./assets/icon/ios-dark.png",
+        "light": "./assets/icon/ios-light.png",
+        "tinted": "./assets/icon/ios-tinted.png"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/icon/adaptiveIcon.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.l3l4ck.iconapp"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon/splash-icon-light.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          },
+          "light": {
+            "backgroundColor": "#ffffff"
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "491c08b5-0e52-4b07-83d5-558439179ac5"
+      }
+    }
+  }
+}
