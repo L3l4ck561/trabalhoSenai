@@ -1,5 +1,6 @@
 # testes para JS
 https://jestjs.io
+https://cypress.io
 
 # Criando arquivo 'package.json'
 $ npm init -y

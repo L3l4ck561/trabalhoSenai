@@ -1,0 +1,4 @@
+iniciando projeto vite
+https://vite.dev/guide/
+
+$ npm create vite@latest aula_8
