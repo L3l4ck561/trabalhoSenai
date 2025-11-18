@@ -1,127 +1,154 @@
-import React, { useState } from 'react';
-import './kanban.css';
+/*
+ * Conceitos-chave do React aplicados:
+ * - useRef: Para obter uma referência direta à tag <canvas> do DOM.
+ * - useState: Para controlar se o utilizador está a desenhar, a cor e a espessura.
+ * - useEffect: Para configurar o contexto do canvas assim que o componente é montado
+ * e para atualizar o contexto sempre que a cor ou a espessura mudarem.
+ *
+ * Conceitos-chave do Canvas aplicados:
+ * - getContext('2d'): Para obter as ferramentas de desenho.
+ * - Eventos do Mouse: onMouseDown, onMouseUp, onMouseMove.
+ * - Métodos de Desenho: beginPath, moveTo, lineTo, stroke, lineCap.
+ */
 
-const tarefasIniciais = [
-  { id: 1, texto: 'Configurar o ambiente React', status: 'aFazer' },
-  { id: 2, texto: 'Criar o componente Kanban', status: 'aFazer' },
-  { id: 3, texto: 'Estilizar as colunas', status: 'emAndamento' },
-  { id: 4, texto: 'Implementar o `useState`', status: 'concluido' },
-];
+import React, { useState, useRef, useEffect } from 'react';
+import './App.css';
 
-const colunas = ['aFazer', 'emAndamento', 'concluido'];
+function Paint() {
+    // --- Refs ---
+    // ref para a tag <canvas>
+    const canvasRef = useRef(null);
+    // ref para guardar o contexto de desenho (as "ferramentas")
+    const contextRef = useRef(null);
 
-function Kanban() {
-  const [tarefas, setTarefas] = useState(tarefasIniciais);
-  const [draggedTaskId, setDraggedTaskId] = useState(null);
-  const [novaTarefaTexto, setNovaTarefaTexto] = useState('');
+    // --- Estados ---
+    // Estado para saber se o botão do rato está pressionado
+    const [isDrawing, setIsDrawing] = useState(false);
+    // Estados para o desafio (cor e espessura)
+    const [cor, setCor] = useState('#000000');
+    const [espessura, setEspessura] = useState(5);
+    const [isErasing, setIsErasing] = useState(false); // Estado para a borracha
 
-  const handleDragStart = (evento, id) => {
-    setDraggedTaskId(id);
-    evento.currentTarget.classList.add('arrastando');
-  };
+    // --- Efeito de Configuração (Setup) ---
+    // Este useEffect é executado APENAS UMA VEZ, quando o componente é montado.
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        // Define um tamanho fixo para o canvas (pode ser dinâmico)
+        canvas.width = 800;
+        canvas.height = 500;
 
-  const handleDragEnd = (evento) => {
-    setDraggedTaskId(null);
-    evento.currentTarget.classList.remove('arrastando');
-  };
+        // Obtém o contexto 2D
+        const context = canvas.getContext('2d');
+        context.lineCap = 'round'; // Deixa as linhas com pontas arredondadas
+        context.strokeStyle = cor; // Define a cor inicial
+        context.lineWidth = espessura; // Define a espessura inicial
 
-  const handleDragOver = (evento) => {
-    evento.preventDefault();
-  };
+        // Guarda o contexto no ref para o podermos usar noutras funções
+        contextRef.current = context;
+    }, []); // O array vazio [] garante que isto só é executado uma vez.
 
-  const handleDrop = (evento, novoStatus) => {
-    evento.preventDefault();
-
-    moverTarefa(draggedTaskId, novoStatus);
-
-    evento.currentTarget.classList.remove('drag-over');
-  };
-
-  const handleDragEnter = (evento) => {
-    evento.currentTarget.classList.add('drag-over');
-  };
-  const handleDragLeave = (evento) => {
-    evento.currentTarget.classList.remove('drag-over');
-  };
-
-  const moverTarefa = (id, novoStatus) => {
-    setTarefas((tarefasAtuais) => {
-      return tarefasAtuais.map(tarefa => {
-        if (tarefa.id === id) {
-          return { ...tarefa, status: novoStatus };
+    // --- Efeito de Atualização (Cor/Espessura) ---
+    // Este useEffect é executado sempre que os estados 'cor' ou 'espessura' mudam.
+    useEffect(() => {
+        if (contextRef.current) {
+            contextRef.current.strokeStyle = isErasing ? '#F0F2F5' : cor; // Use a cor de fundo do body
+            contextRef.current.lineWidth = espessura;
+            contextRef.current.globalCompositeOperation = isErasing ? 'destination-out' : 'source-over';
         }
-        return tarefa;
-      });
-    });
-  };
+    }, [cor, espessura, isErasing]); // Array de dependências
 
-  const handleAdicionarTarefa = (evento) => {
-    evento.preventDefault();
+    // Funções de Evento do Mouse
 
-    const textoLimpo = novaTarefaTexto.trim();
-    if (textoLimpo === '') return;
+    const iniciarDesenho = (evento) => {
+        // evento.nativeEvent.offsetX/Y dá-nos as coordenadas X e Y
+        // relativas ao canto superior esquerdo do PRÓPRIO CANVAS.
+        const { offsetX, offsetY } = evento.nativeEvent;
 
-    const novaTarefa = {
-      id: Date.now(),
-      texto: textoLimpo,
-      status: 'aFazer'
+        contextRef.current.beginPath(); // Começa um novo "caminho" de desenho
+        contextRef.current.moveTo(offsetX, offsetY); // Move o "pincel" para onde o rato clicou
+        setIsDrawing(true); // Ativa o modo de desenho
     };
 
-    setTarefas(tarefasAtuais => [...tarefasAtuais, novaTarefa]);
+    const pararDesenho = () => {
+        contextRef.current.closePath(); // Fecha o caminho de desenho
+        setIsDrawing(false); // Desativa o modo de desenho
+    };
 
-    setNovaTarefaTexto('');
-  };
+    const desenhar = (evento) => {
+        // Só desenha se o botão do rato estiver pressionado (isDrawing === true)
+        if (!isDrawing) {
+            return;
+        }
+        const { offsetX, offsetY } = evento.nativeEvent;
+        contextRef.current.lineTo(offsetX, offsetY); // Desenha uma linha da posição anterior até à atual
+        contextRef.current.stroke(); // "Pinta" a linha na tela
+    };
 
-  return (
-    <>
-      <form className="add-task-form" onSubmit={handleAdicionarTarefa}>
-        <input
-          type="text"
-          value={novaTarefaTexto}
-          onChange={(e) => setNovaTarefaTexto(e.target.value)}
-          placeholder="Adicionar nova tarefa..."
-        />
-        <button type="submit">Adicionar</button>
-      </form>
-      <div className="kanban-board">
-        {colunas.map(status => (
-          <div
-            key={status}
-            className="kanban-coluna"
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, status)}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-          >
-            <h2>
-              {status === 'aFazer' && 'A Fazer'}
-              {status === 'emAndamento' && 'Em Andamento'}
-              {status === 'concluido' && 'Concluído'}
-            </h2>
+    const limparTela = () => {
+        const originalCompositeOperation = contextRef.current.globalCompositeOperation;
+        contextRef.current.globalCompositeOperation = 'source-over';
+        contextRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        contextRef.current.globalCompositeOperation = originalCompositeOperation; // Restaura
+    };
 
-            <div className="kanban-coluna-cartoes">
-              {tarefas
-                .filter(tarefa => tarefa.status === status)
-                .map(tarefa => (
-                  <div
-                    key={tarefa.id}
-                    className="kanban-cartao"
-                    draggable="true"
-                    onDragStart={(e) => handleDragStart(e, tarefa.id)}
-                    onDragEnd={handleDragEnd}
-                  >
-                    {tarefa.texto}
-                  </div>
-                ))}
+    const toggleEraser = () => {
+        setIsErasing(prev => !prev); // Alterna o estado da borracha
+    };
+
+    return (
+        <div className="paint-container">
+            <h1 className="paint-title">
+                Quadro de Desenho Simples
+            </h1>
+
+            <div className="paint-toolbar">
+                <label htmlFor="cor">Cor:</label>
+                <input
+                    type="color"
+                    id="cor"
+                    value={cor}
+                    onChange={(e) => {
+                        setCor(e.target.value);
+                        setIsErasing(false); // Desativa a borracha ao escolher uma cor
+                    }}
+                    disabled={isErasing} // Desativa a seleção de cor quando a borracha está ativa
+                />
+
+                <label htmlFor="espessura">Espessura:</label>
+                <input
+                    type="range"
+                    id="espessura"
+                    min="1"
+                    max="50"
+                    value={espessura}
+                    onChange={(e) => setEspessura(e.target.value)}
+                />
+                <span>{espessura}px</span>
+
+                <button
+                    onClick={toggleEraser}
+                    className={`botao-borracha ${isErasing ? 'active' : ''}`}
+                >
+                    {isErasing ? 'Desativar Borracha' : 'Ativar Borracha'}
+                </button>
+
+                <button onClick={limparTela} className="botao-limpar">Limpar Tudo</button>
             </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+
+            {/* --- A TELA DE DESENHO (Canvas) --- */}
+            <canvas
+                ref={canvasRef} // Liga o ref ao elemento canvas
+                onMouseDown={iniciarDesenho} // Evento: Clicar com o rato
+                onMouseUp={pararDesenho}     // Evento: Soltar o clique
+                onMouseLeave={pararDesenho}  // Evento: Rato sai da tela (evita bugs)
+                onMouseMove={desenhar}       // Evento: Mover o rato
+            />
+        </div>
+    );
 }
 
-export default Kanban;
+export default Paint;
+
 
 
 

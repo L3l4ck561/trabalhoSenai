@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import './App.css';
+import './HardwareAPIs.css';
 
 function HardwareAPIs() {
   const [localizacao, setLocalizacao] = useState(null);
