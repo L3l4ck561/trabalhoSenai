@@ -1,0 +1,37 @@
+[
+    {
+        "nome": "Administrador",
+        "nascimento": "2024-09-19",
+        "cpf": "000.000.000-00",
+        "email": "administrador@email.com.br",
+        "senha": "123456"
+    },
+    {
+        "nome": "Helder Louren\u00e7o dos Santos",
+        "nascimento": "1982-07-23",
+        "cpf": "500.400.300-20",
+        "email": "heldermnv@gmail.com",
+        "senha": "123456"
+    },
+    {
+        "nome": "Japoneis da Federal",
+        "nascimento": "2024-09-17",
+        "cpf": "00000000000",
+        "email": "helder.santos@sp.senai.br",
+        "senha": "123456"
+    },
+    {
+        "nome": "rodrigo",
+        "nascimento": "1430-09-11",
+        "cpf": "",
+        "email": "",
+        "senha": ""
+    },
+    {
+        "nome": "rodrigo",
+        "nascimento": "1430-09-11",
+        "cpf": "666.024.069-33",
+        "email": "davi@gaymail.gov",
+        "senha": "davi111"
+    }
+]

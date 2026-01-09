@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1 - Faça um algoritmo que converte grau Celsius para
+        //Fahrenheit. Caso a temperatura em Fahrenheit seja
+        //maior ou igual 90°, apareça um alerta que a temperatura
+        //está acima da máxima permitida, caso contrário,
+        //temperatura dentro do normal. Fórmula: F = C x 1,8 +
+        //32.
+
+
+        let celsius = prompt("Digite a temperatura em Cº: "),
+            fahrenheit = (celsius * 1.8) + 32;
+
+        if (fahrenheit >= 90) {
+            alert(`a temperatura(${fahrenheit}ºfahrenheit)\nestá acima da máxima permitida`)
+        } else { alert(`temperatura(${fahrenheit}ºfahrenheit)\ndentro do normal`) }
+    </script>
+</body>
+
+</html>

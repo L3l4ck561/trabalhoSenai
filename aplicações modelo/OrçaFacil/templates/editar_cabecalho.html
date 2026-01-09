@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <hearder class="header">
+        <h1>OrçaFácil</h1>
+    </hearder>
+    <br>
+    <div class="voltar"><a href="/ler-receita/{{ n_projeto }}"><img style="width: 50px;" src="/static/undo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt=""></a></div>
+    <form action="{{ url_for('edit_cabecalho', codigo=n_projeto) }}" class="criar_TB" method="post">
+        <h1>Editar projeto</h1>
+        <div>
+            <input class="iten-input" type="text" name="cliente" placeholder="Cliente" value="{{ cabecalho[0] }}">
+        </div>
+        <div>
+            <input class="iten-input" type="text" name="endereco" placeholder="Endereço" value="{{ cabecalho[1] }}">
+        </div>
+        <div>
+            <input class="iten-input" type="tel" name="tell" placeholder="Telefone" value="{{ cabecalho[2] }}">
+        </div>
+        <div>
+            <input class="iten-input" type="email" name="email" placeholder="E-mail" value="{{ cabecalho[3] }}">
+        </div>
+        <div>
+            <input class="iten-input" type="text" name="cpf" placeholder="CNPJ/CPF" value="{{ cabecalho[4] }}">
+        </div>
+        <div>
+            <input class="iten-input" type="text" name="titulo" placeholder="Título" value="{{ cabecalho[5] }}">
+        </div>
+        <div>
+            <button type="submit" class="btn">Atualizar</button>
+        </div>
+    </form>
+    <div class="dell-cabecalho"><a href="/del-projeto/{{ n_projeto }}" onclick="deletar()"><b>Deletar Projeto</b></a></div>
+    <footer class="footer">
+        <p>Copyright &COPY; 2024 - Todos os direitos reservados</p>
+    </footer>
+</body>
+<script>
+    function deletar() {
+        if (confirm("Você tem certeza que deseja deletar o projeto?")) {
+            return true;
+        } else{
+            return false;
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,48 @@
+-- Cria o banco de dados.
+DROP DATABASE if EXISTS papyro;
+CREATE DATABASE if NOT EXISTS papyro;
+USE papyro;
+
+-- Cria a tabela de leitores.
+DROP TABLE if EXISTS leitores;
+CREATE TABLE if NOT EXISTS leitores (
+	cpf VARCHAR(15) NOT NULL,
+	nome VARCHAR(100) NOT NULL,
+	endereco VARCHAR(200) DEFAULT NULL,
+	telefone VARCHAR(20) DEFAULT NULL,
+	email VARCHAR(100) DEFAULT NULL,
+	ativo INT(11) NOT NULL DEFAULT 1,
+	PRIMARY KEY (cpf) USING BTREE
+);
+
+-- Cria a tabela de livros.
+DROP TABLE if EXISTS livros;
+CREATE TABLE if NOT EXISTS livros (
+	isbn VARCHAR(20) NOT NULL,
+	titulo VARCHAR(200) NOT NULL,
+	autor VARCHAR(100) DEFAULT NULL,
+	editora VARCHAR(20) DEFAULT NULL,
+	ano_publicacao YEAR(4) DEFAULT NULL,
+	edicao VARCHAR(20) DEFAULT NULL,
+	genero VARCHAR(100) DEFAULT NULL,
+	ativo INT(11) NOT NULL DEFAULT 1,
+	PRIMARY KEY (isbn) USING BTREE 
+);
+
+-- Cria a tabela de emprestimos
+DROP TABLE if EXISTS emprestimos;
+CREATE TABLE if NOT EXISTS emprestimos (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	cpf_leitor VARCHAR(15) DEFAULT NULL,
+	isbn_livro VARCHAR(20) DEFAULT NULL,
+	data_emprestimo DATE DEFAULT NULL,
+	data_devolucao DATE DEFAULT NULL,
+	ativo INT(11) NOT NULL DEFAULT 1,
+	PRIMARY KEY (id),
+	KEY FK_leitor (cpf_leitor),
+	KEY FK_livro (isbn_livro),
+	CONSTRAINT FK_leitor FOREIGN KEY (cpf_leitor) REFERENCES leitores (cpf) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT FK_livro FOREIGN KEY (isbn_livro) REFERENCES livros (isbn) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+__________________________________________________________________________________________________________________________

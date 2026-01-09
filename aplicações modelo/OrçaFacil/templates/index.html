@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <hearder class="header">
+        <h1>OrçaFácil</h1>
+    </hearder>
+    <br>
+    <main class="main">
+        <form action="/" class="criar_TB" method="post">
+            <h1>criando um projeto</h1>
+            <div>
+                <input class="iten-input" type="text" name="cliente" placeholder="Cliente">
+            </div>
+            <div>
+                <input class="iten-input" type="text" name="endereco" placeholder="Endereço">
+            </div>
+            <div>
+                <input class="iten-input" type="tel" name="tell" placeholder="Telefone">
+            </div>
+            <div>
+                <input class="iten-input" type="email" name="email" placeholder="E-mail">
+            </div>
+            <div>
+                <input class="iten-input" type="text" name="cpf" placeholder="CNPJ/CPF">
+            </div>
+            <div>
+                <input class="iten-input" type="text" name="titulo" placeholder="Título">
+            </div>
+            <div>
+                <button type="submit" class="btn">Criar</button>
+            </div>
+        </form>
+        <div id="projeto-itens">
+            <h1>Projetos criados</h1>
+            <ul>
+                {% for projeto in projetos %}
+                <a href="/ler-receita/{{ projeto[0] }}"><div class="iten-orcamento"><li class="iten-Projeto">{{ projeto[0] }} - {{ projeto[1] }}</li></div></a>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Copyright &COPY; 2024 - Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>

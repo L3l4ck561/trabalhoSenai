@@ -1,0 +1,41 @@
+[
+    {
+        "email": "",
+        "chat": [
+            [
+                {
+                    "conta": "teste@gmail.com",
+                    "user": "cafe",
+                    "id": 1,
+                    "task": "oi"
+                }
+            ],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "nome": "cafe",
+        "nascimento": "3002-04-05",
+        "email": "teste@gmail.com",
+        "senha": "1234",
+        "imagem": "data:image/jpeg;base64,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"
+    },
+    {
+        "nome": "carlos",
+        "nascimento": "2007-01-05",
+        "email": "carlos@gmail.com",
+        "senha": "1234",
+        "imagem": "https://imgs.search.brave.com/jC04cRKesxGrWEJMwBoLL_WBYtrvjR5_wT41jo_K3pc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA4LzMzLzMyLzc1/LzM2MF9GXzgzMzMy/NzU0NV9Eb2h4djdP/YjVrQ1QxMUpkUUND/SHhmekFiUk94WDFT/Yi5qcGc"
+    },
+    {
+        "nome": "carlos",
+        "nascimento": "1111-11-12",
+        "email": "test@gmail.com",
+        "senha": "12345",
+        "imagem": "/static/user.png"
+    }
+]

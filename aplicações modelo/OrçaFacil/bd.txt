@@ -1,0 +1,25 @@
+DROP DATABASE if EXISTS orcafacil;
+CREATE DATABASE if NOT EXISTS orcafacil;
+USE orcafacil;
+
+CREATE TABLE pedido(
+	codigo INT PRIMARY KEY AUTO_INCREMENT,
+	quantidade INT(10) DEFAULT 1,
+	nome_produto VARCHAR(100),
+	descricao TEXT,
+	valor_quant DECIMAL (13,2) DEFAULT 0,
+	ativo INT NOT NULL DEFAULT 1,
+	n_orca INT
+);
+
+CREATE TABLE cabecalho(
+	codigo INT PRIMARY KEY AUTO_INCREMENT,
+	nome_projeto VARCHAR(100) DEFAULT 'Orçamento',
+	cpf_cnpj VARCHAR(25),
+	cliente VARCHAR(100),
+	email VARCHAR(200),
+	telefone VARCHAR(20),
+	endereco VARCHAR(200),
+	ativo INT NOT NULL DEFAULT 1
+);
+

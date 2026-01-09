@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //6 - Faça um algoritmo que leia 2 números, some-os e
+        //exiba uma mensagem no console com o resultado
+        //comparando se os valores somados são maiores,
+        //menores ou iguais a 100.
+
+        let num = parseFloat(prompt("digite 1º número: ")),
+            num2 = parseFloat(prompt("digite 2º número: "));
+        let soma = num + num2
+
+        if (soma == 100){
+            console.log("os valores somados é iguais a 100")
+        }else if (soma > 100){
+            console.log("os valores somados é maior a 100")
+        }else {console.log("os valores somados é menor a 100")}
+    </script>
+</body>
+</html>

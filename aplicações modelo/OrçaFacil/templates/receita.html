@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <hearder class="header">
+        <h1>OrçaFácil</h1>
+    </hearder>
+    <div class="voltar"><a href="/"><img style="width: 50px;" src="/static/undo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt=""></a></div>
+    <br>
+    </div>
+    <div class="receita">
+        <div class="cabecalho">
+            {% for iten in orca %}
+            <table class="table">
+                <tr>
+                    <th class="iten1">Cliente:</th>
+                    <td class="iten2">{{ iten[3] }}</td>
+                </tr>
+                <tr>
+                    <th class="iten1">Endereço:</th>
+                    <td class="iten2">{{ iten[6] }}</td>
+                </tr>
+                <tr>
+                    <th class="iten1">Telefone:</th>
+                    <td class="iten2">{{ iten[5] }}</td>
+                </tr>
+                <tr>
+                    <th class="iten1">E-mail:</th>
+                    <td class="iten2">{{ iten[4] }}</td>
+                </tr>
+                <tr>
+                    <th class="iten1">CNPJ/CPF:</th>
+                    <td class="iten2">{{ iten[2] }}</td>
+                </tr>
+                <tr>
+                    <td style="height: 50px;">
+                        <a href="/edit-cabecalho/{{ n_projeto }}" class="btn2">Editar</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="orca">
+                <h1>{{ iten[1] }}</h1>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="pedido">
+            <table class="table">
+                
+                <thead>
+                    <tr>
+                        <th class="iten-head5"></th>
+                        {% if cod == 0 %}
+                        <th class="iten-head5">Adicionando Pedido</th>
+                        {% else %}
+                        <th class="iten-head5">Editar Pedido</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th class="iten-head1">Quant.</th>
+                        <th class="iten-head2">Unit.</th>
+                        <th class="iten-head3">Descrição</th>
+                        <th class="iten-head4">Unitário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="/add-pedido/{{ n_projeto }}" method="post">
+                        {% if cod == 0 %}
+                        <tr>
+                            <td class="iten-body">
+                                <input class="input-body" type="number" name="quant">
+                            </td>
+                            <td class="iten-body">
+                                <input class="input-body" type="text" name="unit" required>
+                            </td>
+                            <td class="iten-body">
+                                <input class="input-body" type="text" name="desc">
+                            </td>
+                            <td class="iten-body">
+                                <input class="input-body" type="number" name="unitario" required>
+                            </td>
+                            <td id="btn">
+                                <button type="submit"><img src="/static/add.png" alt=""></button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </form>
+                    <form action="/edit-pedido/{{codigo}}/{{ n_projeto }}" method="post">
+                        {% if cod == 1 %}
+                        <tr>
+                            <td class="iten-body">
+                                <input class="input-body" type="number" name="quant2" value="{{pedido_edit[1]}}">
+                            </td>
+                            <td class="iten-body">
+                                <input class="input-body" type="text" name="unit2" value="{{pedido_edit[2]}}" required>
+                            </td>
+                            <td class="iten-body">
+                                <input class="input-body" type="text" name="desc2" value="{{pedido_edit[3]}}">
+                            </td>
+                            <td class="iten-body">
+                                <input class="input-body" type="number" name="unitario2" value="{{pedido_edit[4]}}" required>
+                            </td>
+                            <td id="btn">
+                                <button type="submit"><img src="/static/add.png" alt=""></button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </form>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="pedido">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="iten-head1">Quant.</th>
+                        <th class="iten-head2">Unit.</th>
+                        <th class="iten-head3">Descrição</th>
+                        <th class="iten-head4">Unitário</th>
+                        <th class="iten-head4">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in pedidos %}
+                    <tr>
+                        <td class="iten-body">{{ pedido[1] }}</td>
+                        <td class="iten-body">{{ pedido[2] }}</td>
+                        <td class="iten-body">{{ pedido[3] }}</td>
+                        <td class="iten-body">R${{ pedido[4] }}</td>
+                        <td class="iten-body">R${{ pedido[1] * pedido[4] }}</td>
+                        <td id="btn">
+                            <a href="/edit-pedido/{{ pedido[0] }}/{{ n_projeto }}"><img src="/static/edit_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt=""></a>
+                            <a href="/delt-pedido/{{ pedido[0] }}/{{ n_projeto }}"><img src="/static/cancel_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt=""></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th class="iten-foot">Total Geral</th>
+                        <td class="iten-foot">R${{ total }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>Copyright &COPY; 2024 - Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>
