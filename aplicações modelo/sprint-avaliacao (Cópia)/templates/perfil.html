@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/styles.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <title>GameStream</title>
+    </head>
+    <style>
+        .tlt{color: #888}
+    </style>
+<body>
+    <header class="header">
+        <div class="logo">GameStream</div>
+        <div class="user-menu">
+            <a href="/index" class="btn">Voltar</a>
+        </div>
+    </header>
+    <aside class="sidebar">
+        <h3>Configurações</h3>
+        <ul class="channel-list">
+            <a href="{{ url_for('conf', cod = 0) }}">
+            <li class="channel-item">Editar Perfil</li></a>
+            <a href="{{ url_for('conf', cod = 1) }}">
+            <li class="channel-item">Idioma</li></a>
+            <a href="/login">
+            <li class="channel-item">Mudar de conta</li></a>
+            <a href="/sair">
+            <li class="channel-item">Sair</li></a>
+        </ul>
+    </aside>
+    <main class="main-content">
+        <div class="video-container" style="background-color: #0e0e10;">
+            {% if cod == 0 %}
+            <h1>Editar Perfil</h1><br><hr><br>
+            <form class="card" action="/editar" method="post">
+                <div class="login-content">
+                        <label class="tlt" for="name">Nome de usuário:</label>
+                        <input type="text" class="input-login" name="nome" value="{{ usuario.nome }}" required>
+                        <br><br>
+                        <label class="tlt" for="email">Email:</label>
+                        <input type="email" class="input-login" name="email" value="{{ usuario.email }}" required>
+                        <br><br>
+                        <label class="tlt" for="date">Data de Nascimento:</label>
+                        <input class="input-login" name="nascimento" type="date" value="{{ usuario.nascimento }}" required>
+                        <br><br>
+                        <label class="tlt" for="senha">Senha:</label>
+                        <input class="input-login" type="text" name="senha" value="{{ usuario.senha }}" required>
+                        <div><button class="btn" id="btn" type="submit">Atualizar</button></div>
+                </div>
+                </form>
+                <br><a href="/excluir">Deletar perfil?</a>
+            {% elif cod == 1 %}
+            <h1>Mudar Idioma</h1><br><hr><br>
+            <form action="" class="card">
+                <div class="login-content" style="width: 200px;">
+                <input type="radio" name="Português">
+                <label for="Português">Português</label><br><br>
+                <input type="radio" name="Inglês">
+                <label for="Inglês">Inglês</label><br><br>
+                <input type="radio" name="Polonês">
+                <label for="Polonês">Polonês</label><br><br>
+                <input type="radio" name="Bemba">
+                <label for="Bemba">Bemba</label>
+            </div>
+            </form>
+            {% endif %}
+        </div>
+    </main>
+    <footer class="footer">
+        <p>
+            &copy; 2024 - GameStream
+        </p>
+    </footer>
+</body>
+</html>

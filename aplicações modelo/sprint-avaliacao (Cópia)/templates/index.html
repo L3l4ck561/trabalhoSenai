@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>GameStream</title>
+</head>
+{% if cod == 0 %}
+<style>
+    #um {
+        color: chartreuse;
+        font-weight: bold;
+    }
+</style>
+{% elif cod == 1 %}
+<style>
+    #dois {
+        color: blue;
+        font-weight: bold;
+    }
+</style>
+{% elif cod == 2 %}
+<style>
+    #tres {
+        color: purple;
+        font-weight: bold;
+    }
+</style>
+{% elif cod == 3 %}
+<style>
+    #quatro {
+        color: pink;
+        font-weight: bold;
+    }
+</style>
+{% elif cod == 4 %}
+<style>
+    #cinco {
+        color: orange;
+        font-weight: bold;
+    }
+</style>
+{% endif %}
+
+<body>
+    <div id="topo"></div>
+    <header class="header">
+        <div class="logo">GameStream</div>
+        <div class="user-menu">
+            <button class="btn">Usuário</button>
+            <div class="user-menu-content">
+                <a href="{{ url_for('perfil', cod = 5) }}">
+                    <div class="channel-item">Perfil</div>
+                </a>
+                <a href="/conf">
+                    <div class="channel-item">Configurações</div>
+                </a>
+                <a href="/sair">
+                    <div class="channel-item">Sair</div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div id="img"></div>
+    <div class="fixed"><a href="#topo"><img width="30px"
+                src="static/vertical_align_top_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" alt=""></a></div>
+    <aside class="sidebar">
+        <h3>Canais ao vivo</h3>
+        <ul class="channel-list">
+            <a href="{{ url_for('index', cod = 0) }}">
+                <li class="channel-item" id="um"><span class="material-symbols-outlined">
+                        joystick
+                    </span>ProGamer123</li>
+            </a>
+            <a href="{{ url_for('index', cod = 1) }}">
+                <li class="channel-item" id="dois"><span class="material-symbols-outlined">
+                        joystick
+                    </span>StreamMaster</li>
+            </a>
+            <a href="{{ url_for('index', cod = 2) }}">
+                <li class="channel-item" id="tres"><span class="material-symbols-outlined">
+                        joystick
+                    </span>GameQueen</li>
+            </a>
+            <a href="{{ url_for('index', cod = 3) }}">
+                <li class="channel-item" id="quatro"><span class="material-symbols-outlined">
+                        joystick
+                    </span>SpeedRunner</li>
+            </a>
+            <a href="{{ url_for('index', cod = 4) }}">
+                <li class="channel-item" id="cinco"><span class="material-symbols-outlined">
+                        joystick
+                    </span>Hunter007</li>
+            </a>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="video-container">
+            {% if cod == 0 %}
+            <iframe src="https://www.youtube.com/embed/SxeeuUh8R0Q" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+
+            {% elif cod == 1 %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ou6UsEf1J_o?si=uY2lf_Ln2LZo70KC"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif cod == 2 %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1FMGM_jZqY8?si=FbKzQFA8zWNgyqwR"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif cod == 3 %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/t5SSjmZoEco?si=8ukkQSxCYqmbRa--"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif cod == 4 %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/k_Wej88QiNw?si=8fqe6lLaPUZ59kVF"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% elif cod == 5 %}
+            <style>
+                .video-container {
+                    background-color: #0e0e10
+                }
+
+                .avatar h1 {
+                    position: relative;
+                    left: 120px;
+                    top: -100px;
+                    color: blueviolet;
+                }
+
+                .avatar img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                }
+            </style>
+            <div class="avatar" id="avatar" style="background-color: white;width: 100px;height: 100px;"><img
+                    src="{{ usuario.imagem }}" alt="">
+                <h1>perfil</h1>
+            </div>
+            <br>
+            <form action="/img-perfil" method="post">
+                <input type="text" placeholder="URL da imagem" name="url" required>
+                <button type="submit">mudar</button>
+            </form>
+            <br>
+            <h1>{{ usuario.nome }}</h1>
+            <h6>user</h6><br>
+            <p>Email: {{ usuario.email }}</p><br>
+            <p>Data de Nascimeno<br>{{ usuario.nascimento }}</p>
+            {% endif %}
+            {% if cod != 5 %}
+            <div class="video-overlay"></div>
+            {% endif %}
+        </div>
+        <div class="streamer-info">
+            {% if cod == 0 %}
+            <div class="avatar">
+                <img src="/static/360_F_316014283_yGC7pqaC6QgpH3h08Y1U1M7SH36f3Imr.webp" style="width: 40px;border-radius: 50%;" alt="">
+                <div class="swing"></div>
+            </div>
+            {% elif cod == 1 %}
+            <div class="avatar" style="background-color: blue;"></div>
+            {% elif cod == 2 %}
+            <div class="avatar" style="background-color: purple;"></div>
+            {% elif cod == 3 %}
+            <div class="avatar" style="background-color: pink;"></div>
+            {% elif cod == 4 %}
+            <div class="avatar" style="background-color: orange;"></div>
+            {% elif cod != 5 %}
+            <div class="avatar"></div>
+            {% endif %}
+            <h2 class="stream-title">{{ titulo }}</h2>
+        </div>
+        {% if cod != 5 %}
+        <div class="chat-container">
+            <div style="padding: 20px;">Chat ao vivo</div>
+
+
+
+            <ul>
+                {% for task in tasks %}
+
+                {% if task["conta"] == conta %}
+                <div class="chat-print">
+                    <li>{{ task.task }}<b style="color: blueviolet;"> - you</b></li>
+                </div>
+                {% endif %}
+
+                {% if task["conta"] != conta %}
+                <div class="chat-print2">
+                    <li><b style="color: rgb(218, 178, 255);">{{ task["user"] }} - </b>{{ task.task }}</li>
+                </div>
+                {% endif %}
+
+                {% endfor %}
+            </ul>
+
+
+
+
+
+            <form action="/add/{{ cod }}" method="post" class="container-input">
+                <input type="text" name="task" class="input-chat" placeholder="Escreva sua mensagem..."
+                    autocomplete="off" required>
+                <button type="submit" class="btn">Enviar</button>
+            </form>
+        </div>
+        {% endif %}
+    </main>
+    <!-- Notificação -->
+    {% if cod != 5 %}
+    <div class="notification">
+        <p>ProGamer123 acabou de iniciar uma transmissão</p>
+    </div>
+    {% endif %}
+    <footer>
+
+        <p class="footer">
+            &copy; 2024 - GameStream
+        </p>
+    </footer>
+</body>
+
+</html>

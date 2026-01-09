@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" />
+    <title>Login</title>
+</head>
+
+<body>
+    <div id="topo"></div>
+    <header class="header">
+        <a href="/">
+            <div class="logo">GameStream</div>
+        </a>
+        <div class="user-menu">
+            <a href="/login"><button class="btn">Sing in</button></a>
+            <div class="user-menu-content">
+                <a href="/cadastro">
+                    <div class="channel-item">Sing up</div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div id="img"><a href="/"><img width="30px"
+                src="static/home_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png" alt=""></a></div>
+    
+    <div class="fixed"><a href="#topo"><img width="30px" src="static/vertical_align_top_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png"alt=""></a></div>
+
+    <main class="main-content">
+        <div class="login-content">
+            <h3>Login</h3><br>
+            <form id="login" class="register" action="/validar-login" method="post">
+                <input type="email" class="input-login" name="email" placeholder="   Digite seu Email.">
+                <br><br>
+                <input class="input-login" type="password" name="senha" placeholder="   Digite sua Senha.">
+                <p>Esqueceu a senha? <a href="">Click aqui</a></p>
+                <div><button type="submit" class="btn">Entrar</button></div>
+              </div>
+            </form>
+        </div>
+    </main>
+
+    <div class="tela">
+        <img class="bola1" src="/static/bola.png" style="width: 50px;" alt="">
+        <img class="bola2" src="/static/bola.png" style="width: 50px;" alt="">
+        <img class="nave" src="/static/nave.png" alt="">
+        <div class="fim" style="top: 290px;"></div>
+    </div>
+
+    <footer>
+        <p class="footer">
+            &copy; 2024 - GameStream
+        </p>
+     </footer>
+</body>
+
+</html>
